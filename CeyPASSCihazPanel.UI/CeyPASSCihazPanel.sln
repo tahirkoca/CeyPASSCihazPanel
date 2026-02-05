@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyPASSCihazPanel.UI", "CeyPASSCihazPanel.UI.csproj", "{13A2BCA2-98D5-44C6-9F67-2FD351211ECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyPASSCihazPanel.Entities", "..\CeyPASSCihazPanel.Entities\CeyPASSCihazPanel.Entities.csproj", "{2D523739-BB7D-42C5-9C66-82C9318D5C20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyPASSCihazPanel.DAL", "..\CeyPASSCihazPanel.DAL\CeyPASSCihazPanel.DAL.csproj", "{89FCDC70-9134-41A8-BA6B-76988E7FA11D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyPASSCihazPanel.Business", "..\CeyPASSCihazPanel.Business\CeyPASSCihazPanel.Business.csproj", "{61632915-7845-43A5-8C37-207963725276}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CeyPASSCihazPanel.Setup", "..\CeyPASSCihazPanel.Setup\CeyPASSCihazPanel.Setup.vdproj", "{09B0274D-D851-1D3A-92FF-BD549973A808}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13A2BCA2-98D5-44C6-9F67-2FD351211ECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A2BCA2-98D5-44C6-9F67-2FD351211ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A2BCA2-98D5-44C6-9F67-2FD351211ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A2BCA2-98D5-44C6-9F67-2FD351211ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D523739-BB7D-42C5-9C66-82C9318D5C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D523739-BB7D-42C5-9C66-82C9318D5C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D523739-BB7D-42C5-9C66-82C9318D5C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D523739-BB7D-42C5-9C66-82C9318D5C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89FCDC70-9134-41A8-BA6B-76988E7FA11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89FCDC70-9134-41A8-BA6B-76988E7FA11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89FCDC70-9134-41A8-BA6B-76988E7FA11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89FCDC70-9134-41A8-BA6B-76988E7FA11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61632915-7845-43A5-8C37-207963725276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61632915-7845-43A5-8C37-207963725276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61632915-7845-43A5-8C37-207963725276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61632915-7845-43A5-8C37-207963725276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B0274D-D851-1D3A-92FF-BD549973A808}.Debug|Any CPU.ActiveCfg = Debug
+		{09B0274D-D851-1D3A-92FF-BD549973A808}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D626D0D-8C0E-4671-9B3A-7F2B42DE193E}
+	EndGlobalSection
+EndGlobal

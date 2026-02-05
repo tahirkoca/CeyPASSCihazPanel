@@ -1,0 +1,18 @@
+# Visual Studio standard ignore
+.vs/
+bin/
+obj/
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet Packages
+packages/
+*.nupkg
+
+# Sensitive Configuration Files
+CeyPASSCihazPanel.UI/App.config
+*.log
