@@ -1,23 +1,29 @@
 # CeyPASS Cihaz Paneli
 
-## Proje Hakkında
+[ �🇷 Türkçe ](#türkçe) | [ �🇬🇧 English ](#english)
 
+---
+
+<a name="türkçe"></a>
+## �� Türkçe
+
+### Proje Hakkında
 CeyPASS Cihaz Paneli, ZKTeco marka biyometrik cihazların (parmak izi okuyucu, yüz tanıma terminalleri) merkezi olarak yönetilmesini sağlayan bir Windows Forms uygulamasıdır. Uygulama, personel ve kart bazlı erişim kontrolü, cihaz yönetimi, offline veri toplama ve yetkilendirme işlemlerini gerçekleştirir.
 
-## Özellikler
+### Özellikler
 
-### 🔐 Kullanıcı Yönetimi
+#### 🔐 Kullanıcı Yönetimi
 - Güvenli kullanıcı girişi
 - Firma bazlı yetkilendirme
 - Kullanıcı oturum yönetimi
 
-### 👥 Personel ve Kart Yönetimi
+#### 👥 Personel ve Kart Yönetimi
 - Aktif personel listesi görüntüleme
 - Puantajsız kart yönetimi
 - Personel ve kart bazlı cihaz yetkilendirme
 - Toplu tanımlama ve silme işlemleri
 
-### 🖥️ Cihaz Yönetimi
+#### 🖥️ Cihaz Yönetimi
 - ZKTeco cihazlarına TCP/IP üzerinden bağlantı
 - Cihaz durumu izleme (bağlı/bağlı değil)
 - Cihaz bilgilerini görüntüleme (model, seri no, firmware, MAC adresi)
@@ -26,296 +32,158 @@ CeyPASS Cihaz Paneli, ZKTeco marka biyometrik cihazların (parmak izi okuyucu, y
 - Cihaz yeniden başlatma ve kapatma
 - Tüm logları ve kullanıcıları silme
 
-### 📊 Offline Veri Yönetimi
+#### 📊 Offline Veri Yönetimi
 - Cihazlardan offline veri çekme
 - Giriş/çıkış kayıtlarını görüntüleme
 - Excel formatında veri dışa aktarma
 - Offline veri temizleme
 
-### 🔄 Yetkilendirme Sistemi
+#### 🔄 Yetkilendirme Sistemi
 - Personel bazlı cihaz yetkilendirme
 - Kart bazlı cihaz yetkilendirme
 - Veritabanı ile senkronize yetki yönetimi
 - Toplu yetki ekleme/çıkarma
 
-### 🔄 Otomatik Güncelleme
+#### 🔄 Otomatik Güncelleme
 - Uygulama başlangıcında otomatik güncelleme kontrolü
 - Zorunlu güncelleme desteği
 - HTTP üzerinden güncelleme paketi indirme
 
-## Teknoloji Stack
+### Teknoloji Stack
 
-### Framework ve Dil
+#### Framework ve Dil
 - **.NET Framework 4.7.2**
 - **C# (Windows Forms)**
 
-### Mimari Katmanlar
+#### Mimari Katmanlar
 Proje, katmanlı mimari (Layered Architecture) prensiplerine göre tasarlanmıştır:
 
 1. **CeyPASSCihazPanel.UI** - Kullanıcı Arayüzü Katmanı
-   - Windows Forms uygulaması
-   - Kullanıcı etkileşimi ve görsel bileşenler
-
 2. **CeyPASSCihazPanel.Business** - İş Mantığı Katmanı
-   - Servis sınıfları
-   - İş kuralları ve validasyonlar
-   - Cihaz bağlantı yönetimi
-
 3. **CeyPASSCihazPanel.DAL** - Veri Erişim Katmanı
-   - Repository pattern implementasyonu
-   - SQL Server veri erişimi
-   - CRUD operasyonları
-
 4. **CeyPASSCihazPanel.Entities** - Varlık Katmanı
-   - Model sınıfları
-   - Veri transfer objeleri (DTO)
 
-### Kullanılan Kütüphaneler ve Bağımlılıklar
+### Kurulum ve Çalıştırma
 
-| Kütüphane | Versiyon | Kullanım Amacı |
-|-----------|----------|----------------|
-| **zkemkeeper** | 1.0 | ZKTeco cihaz SDK'sı - Biyometrik cihaz iletişimi |
-| **AutoUpdater.NET.Official** | 1.9.2 | Otomatik uygulama güncelleme |
-| **Microsoft.Extensions.DependencyInjection** | 10.0.0 | Dependency Injection container |
-| **Microsoft.Web.WebView2** | 1.0.2592.51 | Modern web içeriği görüntüleme |
-| **System.Data.SqlClient** | - | SQL Server veritabanı bağlantısı |
+> [!ÖNEMLİ]
+> **Yapılandırma Gereklidir**: Bu proje güvenli bir yapılandırma kullanır. Uygulamayı çalıştırmadan önce `App.config` dosyasını ayarlamanız gerekir.
 
-### Veritabanı
-- **SQL Server** (CeyPASS veritabanı)
-- Bağlantı bilgileri `App.config` dosyasında yapılandırılır
+1.  **Projeyi indirin**:
+    ```bash
+    git clone https://github.com/tahirkoca/CeyPASSCihazPanel.git
+    ```
 
-## Proje Yapısı
+2.  **Yapılandırma Dosyasını Ayarlayın**:
+    - `CeyPASSCihazPanel.UI` klasörüne gidin.
+    - **`App.config.example`** dosyasını bulun.
+    - Adını **`App.config`** olarak değiştirin.
+    - Yeni `App.config` dosyasını açın ve connection string içerisindeki şifre alanını güncelleyin:
+    ```xml
+    <connectionStrings>
+        <add name="CeyPASS"
+             connectionString="Server=...;Database=CeyPASS;User Id=sa;Password=SIFRENIZI_BURAYA_YAZIN;" />
+    </connectionStrings>
+    ```
 
-```
-CeyPASSCihazPanel/
-├── CeyPASSCihazPanel.UI/              # Kullanıcı Arayüzü
-│   ├── Forms/
-│   │   ├── loginForm.cs               # Giriş formu
-│   │   └── anaForm.cs                 # Ana uygulama formu
-│   ├── Program.cs                     # Uygulama giriş noktası
-│   └── App.config                     # Yapılandırma dosyası
-│
-├── CeyPASSCihazPanel.Business/        # İş Mantığı
-│   ├── Abstractions/
-│   │   ├── IAuthService.cs            # Kimlik doğrulama servisi
-│   │   ├── IDeviceService.cs          # Cihaz yönetim servisi
-│   │   └── IAdminLookUpService.cs     # Yönetim lookup servisi
-│   └── Services/
-│       ├── AuthService.cs
-│       ├── DeviceService.cs
-│       └── AdminLookUpService.cs
-│
-├── CeyPASSCihazPanel.DAL/             # Veri Erişim
-│   ├── Abstractions/
-│   │   ├── IUserRepository.cs
-│   │   ├── ICihazRepository.cs
-│   │   ├── IPersonelRepository.cs
-│   │   ├── IKisiCihazYetkiRepository.cs
-│   │   ├── IPuantajsizKartRepository.cs
-│   │   └── IPuantajsizKartCihazYetkiRepository.cs
-│   └── Repositories/
-│       ├── SqlUserRepository.cs
-│       ├── SqlCihazRepository.cs
-│       ├── SqlPersonelRepository.cs
-│       ├── SqlKisiCihazYetkiRepository.cs
-│       ├── SqlPuantajsizKartRepository.cs
-│       └── SqlPuantajsizKartCihazYetkiRepository.cs
-│
-├── CeyPASSCihazPanel.Entities/        # Varlıklar
-│   └── Models/
-│       ├── Kullanici.cs               # Kullanıcı modeli
-│       ├── Personel.cs                # Personel modeli
-│       ├── Terminal.cs                # Cihaz modeli
-│       ├── CihazBilgi.cs              # Cihaz bilgi modeli
-│       ├── OfflineLog.cs              # Offline log modeli
-│       ├── PuantajsizKart.cs          # Puantajsız kart modeli
-│       └── ...
-│
-└── CeyPASSCihazPanel.Setup/           # Kurulum projesi
-```
+3.  **Visual Studio Kurulumu**:
+    - `CeyPASSCihazPanel.sln` dosyasını açın.
+    - NuGet paketlerini geri yükleyin.
+    - `zkemkeeper` COM bileşenini kaydedin (gerekirse).
+    - Projeyi derleyin ve çalıştırın (F5).
 
-## Kurulum ve Çalıştırma
-
-### Gereksinimler
-
-- Windows 10 veya üzeri
-- .NET Framework 4.7.2 Runtime
-- SQL Server (2012 veya üzeri)
-- Visual Studio 2022 (geliştirme için)
-- ZKTeco cihazlar için zkemkeeper COM bileşeni
-
-### Veritabanı Yapılandırması
-
-1. `App.config` dosyasını açın
-2. Connection string'i kendi SQL Server bilgilerinize göre güncelleyin:
-
-```xml
-<connectionStrings>
-    <add name="CeyPASS"
-         connectionString="Server=SUNUCU_ADI\INSTANCE;Database=CeyPASS;User Id=KULLANICI_ADI;Password=SIFRE;" />
-</connectionStrings>
-```
-
-### Geliştirme Ortamı Kurulumu
-
-1. **Projeyi klonlayın veya indirin**
-
-2. **Visual Studio'da açın**
-   ```
-   CeyPASSCihazPanel.sln dosyasını Visual Studio ile açın
-   ```
-
-3. **NuGet paketlerini geri yükleyin**
-   ```
-   Visual Studio'da: Tools > NuGet Package Manager > Restore NuGet Packages
-   ```
-
-4. **zkemkeeper COM referansını kaydedin**
-   - ZKTeco SDK'sını kurun
-   - COM referansı otomatik olarak gömülü (EmbedInteropTypes=True)
-
-5. **Projeyi derleyin**
-   ```
-   Build > Build Solution (Ctrl+Shift+B)
-   ```
-
-6. **Uygulamayı çalıştırın**
-   ```
-   Debug > Start Debugging (F5)
-   ```
-
-### Üretim Dağıtımı
-
-1. **Release build oluşturun**
-   ```
-   Configuration: Release
-   Build > Build Solution
-   ```
-
-2. **Setup projesi ile kurulum paketi oluşturun**
-   - CeyPASSCihazPanel.Setup projesi ile MSI kurulum dosyası oluşturulabilir
-
-3. **Otomatik güncelleme yapılandırması**
-   - `update.xml` dosyasını web sunucusuna yerleştirin
-   - `Program.cs` içindeki güncelleme URL'ini güncelleyin
-
-## Kullanım
-
-### Giriş Yapma
-1. Uygulamayı başlatın
-2. Kullanıcı adı ve şifrenizi girin
-3. Firma seçin (opsiyonel)
-4. "Giriş" butonuna tıklayın
-
-### Personel Tanımlama
-1. Ana formda "Personel/Kart" sekmesini açın
-2. Personel listesinden bir personel seçin
-3. Yetkili olacağı cihazları işaretleyin
-4. "Tanımla" butonuna tıklayın
-
-### Toplu Tanımlama
-1. "Toplu Tanımla" sekmesini açın
-2. Personelleri seçin
-3. Cihazları işaretleyin
-4. "Toplu Tanımla" butonuna tıklayın
-
-### Offline Veri Çekme
-1. "Offline Veri" sekmesini açın
-2. Cihazları seçin
-3. "Veri Çek" butonuna tıklayın
-4. Veriler DataGridView'de görüntülenir
-5. "Excel'e Aktar" ile dışa aktarabilirsiniz
-
-### Cihaz Yönetimi
-1. "Cihaz Yönetimi" sekmesini açın
-2. Cihaz bilgilerini görüntüleyin
-3. İşlemler:
-   - Saat Senkronize Et
-   - Cihazı Yeniden Başlat
-   - Cihazı Kapat
-   - Tüm Logları Sil
-   - Tüm Kullanıcıları Sil
-
-## Mimari Kararlar ve Tasarım Desenleri
-
-### Dependency Injection
-- Microsoft.Extensions.DependencyInjection kullanılarak IoC container implementasyonu
-- Servis ve repository'ler constructor injection ile enjekte edilir
-- Loosely coupled, test edilebilir kod yapısı
-
-### Repository Pattern
-- Veri erişim katmanında repository pattern kullanımı
-- Her entity için ayrı repository interface ve implementasyonu
-- Veri kaynağı değişikliklerinde esneklik
-
-### Service Layer Pattern
-- İş mantığı business katmanında servisler içinde kapsüllenir
-- UI katmanı sadece servisleri kullanır, doğrudan repository'lere erişmez
-- Separation of concerns prensibi
-
-### Asenkron Programlama
-- Cihaz işlemleri için async/await pattern kullanımı
-- UI thread'in bloke olmaması için Task-based operations
-- Responsive kullanıcı deneyimi
-
-## Veritabanı Şeması
-
-### Ana Tablolar
-
-- **Kisiler** - Personel bilgileri
-- **PuantajsizKartlar** - Puantajsız kart bilgileri
-- **Cihazlar** - Terminal/cihaz bilgileri
-- **KisiCihazYetki** - Personel-cihaz yetkilendirme ilişkisi
-- **PuantajsizKartCihazYetki** - Kart-cihaz yetkilendirme ilişkisi
-- **Kullanicilar** - Sistem kullanıcıları
-
-## Güvenlik
-
-- Kullanıcı kimlik doğrulaması
-- Firma bazlı veri izolasyonu
-- SQL injection koruması (parametreli sorgular)
-- Bağlantı string'leri yapılandırma dosyasında
-
-## Performans Optimizasyonları
-
-- Connection pooling (SQL Server)
-- Asenkron cihaz işlemleri
-- Lazy loading için ComboBox dropdown genişliği hesaplama
-- DataGridView için sanal mod desteği (büyük veri setleri için)
-
-## Hata Yönetimi
-
-- Try-catch blokları ile exception handling
-- Kullanıcıya anlamlı hata mesajları
-- Log yazma mekanizması (UI üzerinde)
-- Cihaz bağlantı hatalarında otomatik yeniden bağlanma
-
-## Bilinen Sınırlamalar
-
-- Sadece ZKTeco marka cihazlar desteklenir
-- Windows işletim sistemi gereklidir
-- SQL Server veritabanı bağımlılığı
-- Aynı anda tek kullanıcı oturumu
-
-## Gelecek Geliştirmeler
-
-- [ ] Web tabanlı yönetim paneli
-- [ ] Mobil uygulama desteği
-- [ ] Çoklu dil desteği
-- [ ] Detaylı raporlama modülü
-- [ ] Gerçek zamanlı cihaz durumu bildirimleri
-- [ ] API entegrasyonu
-
-## Lisans
-
+### Lisans
 Bu proje özel mülkiyettir ve telif hakkı koruması altındadır.
 
-## İletişim ve Destek
-
-Sorularınız veya sorunlarınız için lütfen sistem yöneticinizle iletişime geçin.
+### İletişim
+**Geliştirici:** CeyPASS Ekibi
 
 ---
 
-**Versiyon:** 1.0  
-**Son Güncelleme:** 2024  
-**Geliştirici:** CeyPASS Ekibi
+<a name="english"></a>
+## �� English
+
+### About the Project
+CeyPASS Device Panel is a Windows Forms application designed for the centralized management of ZKTeco biometric devices (fingerprint readers, face recognition terminals). The application handles personnel and card-based access control, device management, offline data collection, and authorization processes.
+
+### Features
+
+#### 🔐 User Management
+- Secure user login
+- Company-based authorization
+- User session management
+
+#### 👥 Personnel and Card Management
+- View active personnel list
+- Manage cards without attendance (puantaj)
+- Personnel and card-based device authorization
+- Bulk definition and deletion operations
+
+#### 🖥️ Device Management
+- Connection to ZKTeco devices via TCP/IP
+- Device status monitoring (connected/disconnected)
+- View device information (model, serial no, firmware, MAC address)
+- User and log capacity tracking
+- Time synchronization
+- Reboot and power off devices
+- Delete all logs and users
+
+#### 📊 Offline Data Management
+- Retrieve offline data from devices
+- View entry/exit records
+- Export data to Excel format
+- Clear offline data
+
+#### 🔄 Authorization System
+- Personnel-based device authorization
+- Card-based device authorization
+- Database-synchronized authorization management
+- Bulk authorization addition/removal
+
+#### 🔄 Auto Update
+- Automatic update check at startup
+- Mandatory update support
+- Download update packages via HTTP
+
+### Technology Stack
+
+#### Framework and Language
+- **.NET Framework 4.7.2**
+- **C# (Windows Forms)**
+
+#### Architectural Layers
+The project is designed according to Layered Architecture principles:
+
+1. **CeyPASSCihazPanel.UI** - User Information Layer
+2. **CeyPASSCihazPanel.Business** - Business Logic Layer
+3. **CeyPASSCihazPanel.DAL** - Data Access Layer
+4. **CeyPASSCihazPanel.Entities** - Entity Layer
+
+### Installation and Setup
+
+> [!IMPORTANT]
+> **Configuration Required**: This project uses a secure configuration setup. You must configure the `App.config` file before running the application.
+
+1.  **Clone the project**:
+    ```bash
+    git clone https://github.com/tahirkoca/CeyPASSCihazPanel.git
+    ```
+
+2.  **Setup Configuration File**:
+    - Navigate to the `CeyPASSCihazPanel.UI` directory.
+    - Find the file named **`App.config.example`**.
+    - Rename it to **`App.config`**.
+    - Open `App.config` and update the connection string with your SQL Server password:
+    ```xml
+    <connectionStrings>
+        <add name="CeyPASS"
+             connectionString="Server=...;Database=CeyPASS;User Id=sa;Password=YOUR_PASSWORD_HERE;" />
+    </connectionStrings>
+    ```
+
+3.  **Open in Visual Studio**:
+    - Open `CeyPASSCihazPanel.sln`.
+    - Restore NuGet packages.
+    - Register `zkemkeeper` COM component (if not automatically handled).
+    - Build and Run (F5).
+
+---
