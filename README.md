@@ -1,11 +1,11 @@
 # CeyPASS Cihaz Paneli
 
-[ �🇷 Türkçe ](#türkçe) | [ �🇬🇧 English ](#english)
+[ ��🇷 Türkçe ](#türkçe) | [ 🇬🇧 English ](#english)
 
 ---
 
 <a name="türkçe"></a>
-## �� Türkçe
+## 🇹🇷 Türkçe
 
 ### Proje Hakkında
 CeyPASS Cihaz Paneli, ZKTeco marka biyometrik cihazların (parmak izi okuyucu, yüz tanıma terminalleri) merkezi olarak yönetilmesini sağlayan bir Windows Forms uygulamasıdır. Uygulama, personel ve kart bazlı erişim kontrolü, cihaz yönetimi, offline veri toplama ve yetkilendirme işlemlerini gerçekleştirir.
@@ -95,12 +95,12 @@ Proje, katmanlı mimari (Layered Architecture) prensiplerine göre tasarlanmış
 Bu proje özel mülkiyettir ve telif hakkı koruması altındadır.
 
 ### İletişim
-**Geliştirici:** CeyPASS Ekibi
+**Geliştirici:** Tahir Koca
 
 ---
 
 <a name="english"></a>
-## �� English
+## 🇬🇧 English
 
 ### About the Project
 CeyPASS Device Panel is a Windows Forms application designed for the centralized management of ZKTeco biometric devices (fingerprint readers, face recognition terminals). The application handles personnel and card-based access control, device management, offline data collection, and authorization processes.
