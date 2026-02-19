@@ -48,8 +48,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.cihazUserListBox = new System.Windows.Forms.ListBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtLogArama = new System.Windows.Forms.TextBox();
+            this.dgvCihazLoglari = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.cihazSecimListesi = new System.Windows.Forms.CheckedListBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,9 +57,6 @@
             this.logList = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvCihazDurum = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.btnTopluTanimla = new System.Windows.Forms.Button();
             this.btnTopluSilme = new System.Windows.Forms.Button();
@@ -120,11 +117,10 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCihazLoglari)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCihazDurum)).BeginInit();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -439,41 +435,49 @@
             // 
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Controls.Add(this.cihazUserListBox, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.txtLogArama, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.dgvCihazLoglari, 0, 1);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 426);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(642, 417);
             this.tableLayoutPanel10.TabIndex = 19;
             // 
-            // cihazUserListBox
+            // txtLogArama
             // 
-            this.cihazUserListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cihazUserListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cihazUserListBox.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cihazUserListBox.FormattingEnabled = true;
-            this.cihazUserListBox.HorizontalScrollbar = true;
-            this.cihazUserListBox.ItemHeight = 20;
-            this.cihazUserListBox.Location = new System.Drawing.Point(3, 53);
-            this.cihazUserListBox.Name = "cihazUserListBox";
-            this.cihazUserListBox.Size = new System.Drawing.Size(636, 361);
-            this.cihazUserListBox.TabIndex = 17;
+            this.txtLogArama.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLogArama.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtLogArama.ForeColor = System.Drawing.Color.Gray;
+            this.txtLogArama.Location = new System.Drawing.Point(3, 3);
+            this.txtLogArama.Name = "txtLogArama";
+            this.txtLogArama.Size = new System.Drawing.Size(636, 30);
+            this.txtLogArama.TabIndex = 0;
+            this.txtLogArama.Text = "🔍 Loglarda Ara...";
+            this.txtLogArama.TextChanged += new System.EventHandler(this.txtLogArama_TextChanged);
+            this.txtLogArama.Enter += new System.EventHandler(this.txtLogArama_Enter);
+            this.txtLogArama.Leave += new System.EventHandler(this.txtLogArama_Leave);
             // 
-            // label6
+            // dgvCihazLoglari
             // 
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.label6.Location = new System.Drawing.Point(3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(636, 50);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "CİHAZ INFO LOGLARI";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dgvCihazLoglari.AllowUserToAddRows = false;
+            this.dgvCihazLoglari.AllowUserToDeleteRows = false;
+            this.dgvCihazLoglari.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCihazLoglari.BackgroundColor = System.Drawing.Color.White;
+            this.dgvCihazLoglari.ColumnHeadersHeight = 35;
+            this.dgvCihazLoglari.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvCihazLoglari.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCihazLoglari.Location = new System.Drawing.Point(3, 38);
+            this.dgvCihazLoglari.Name = "dgvCihazLoglari";
+            this.dgvCihazLoglari.ReadOnly = true;
+            this.dgvCihazLoglari.RowHeadersVisible = false;
+            this.dgvCihazLoglari.RowHeadersWidth = 51;
+            this.dgvCihazLoglari.RowTemplate.Height = 30;
+            this.dgvCihazLoglari.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCihazLoglari.Size = new System.Drawing.Size(636, 376);
+            this.dgvCihazLoglari.TabIndex = 1;
             // 
             // tableLayoutPanel8
             // 
@@ -559,7 +563,6 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel11, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 0, 3);
@@ -579,52 +582,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(597, 846);
             this.tableLayoutPanel2.TabIndex = 15;
-            // 
-            // tableLayoutPanel11
-            // 
-            this.tableLayoutPanel11.ColumnCount = 1;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Controls.Add(this.dgvCihazDurum, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 386);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(591, 457);
-            this.tableLayoutPanel11.TabIndex = 35;
-            // 
-            // dgvCihazDurum
-            // 
-            this.dgvCihazDurum.AllowUserToAddRows = false;
-            this.dgvCihazDurum.AllowUserToDeleteRows = false;
-            this.dgvCihazDurum.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCihazDurum.BackgroundColor = System.Drawing.Color.White;
-            this.dgvCihazDurum.ColumnHeadersHeight = 40;
-            this.dgvCihazDurum.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvCihazDurum.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCihazDurum.Location = new System.Drawing.Point(3, 38);
-            this.dgvCihazDurum.Name = "dgvCihazDurum";
-            this.dgvCihazDurum.ReadOnly = true;
-            this.dgvCihazDurum.RowHeadersVisible = false;
-            this.dgvCihazDurum.RowHeadersWidth = 51;
-            this.dgvCihazDurum.RowTemplate.Height = 32;
-            this.dgvCihazDurum.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCihazDurum.Size = new System.Drawing.Size(585, 416);
-            this.dgvCihazDurum.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(585, 35);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "CİHAZ DURUM BİLGİSİ";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel7
             // 
@@ -1370,7 +1327,7 @@
             this.Name = "anaForm";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CeyPASS Cihaz Paneli - v2.0";
+            this.Text = "CeyPASS Cihaz Paneli";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1385,11 +1342,11 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCihazLoglari)).EndInit();
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel11.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCihazDurum)).EndInit();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -1411,6 +1368,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOfflineVeriler)).EndInit();
             this.tableLayoutPanelOfflineButonlar.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
         #endregion
 
@@ -1441,11 +1399,8 @@
         private System.Windows.Forms.ListBox logList;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.ListBox cihazUserListBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
-        private System.Windows.Forms.DataGridView dgvCihazDurum;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dgvCihazLoglari;
+        private System.Windows.Forms.TextBox txtLogArama;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
 
         // TAB CONTROL

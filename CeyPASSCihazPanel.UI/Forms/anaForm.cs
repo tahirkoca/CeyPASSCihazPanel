@@ -21,6 +21,7 @@ namespace CeyPASSCihazPanel.UI
         private List<Personel> _tumPersoneller;
         private List<PuantajsizKart> _tumKartlar;
         private List<Terminal> _tumCihazlar;
+        private List<CihazLogItem> _tumLoglar = new List<CihazLogItem>();
 
         public anaForm(IAdminLookupService lookupService, IDeviceService deviceService)
         {
@@ -43,47 +44,22 @@ namespace CeyPASSCihazPanel.UI
                     ComboListesiniModaGoreYukle();
                     idBox.Clear();
                     kartBox.Clear();
-                    dgvCihazDurum.DataSource = null;
+                    ComboListesiniModaGoreYukle();
+                    idBox.Clear();
+                    kartBox.Clear();
                 };
 
                 _deviceService.Start(_firmaId, LogYaz);
                 ComboListesiniModaGoreYukle();
                 CihazlariListele();
-                InitializeDataGridView();
+                CihazlariListele();
 
                 this.WindowState = FormWindowState.Maximized;
-
-                dgvCihazDurum.RowTemplate.Height = 32;
-                dgvCihazDurum.ColumnHeadersHeight = 40;
-                dgvCihazDurum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250);
-                dgvCihazDurum.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
-                dgvCihazDurum.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-                dgvCihazDurum.DefaultCellStyle.Padding = new Padding(5);
-
-                foreach (DataGridViewColumn col in dgvCihazDurum.Columns)
-                {
-                    if (col is DataGridViewCheckBoxColumn)
-                    {
-                        col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    }
-                }
-
-                cihazSecimListesi.Font = new Font("Segoe UI", 10F);
-                cihazSecimListesi.ItemHeight = 24;
-
-                logList.Font = new Font("Consolas", 10F);
-                logList.ItemHeight = 20;
-
-                cihazUserListBox.Font = new Font("Consolas", 10F);
-                cihazUserListBox.ItemHeight = 20;
-
-                var version = Assembly.GetExecutingAssembly().GetName().Version;
-                this.Text = $"CeyPASS Cihaz Paneli - v{version} - {_kullaniciAdi}";
 
                 YetkiYonetimiTabBaslat();
                 OfflineVeriTabBaslat();
                 CihazYonetimiTabBaslat();
+                InitializeLogDataGridView();
             }
             catch (Exception ex)
             {
@@ -268,11 +244,8 @@ namespace CeyPASSCihazPanel.UI
                     : "❌ Tanımlama başarısız.");
 
                 // Grid'i güncelle
-                //Task.Run(async () => await KartCihazDurumunuGoster(kartId));
-                this.BeginInvoke(new Action(() =>
-                {
-                    KartCihazDurumunuGoster(kartId);
-                }));
+                // Cihaz durum gösterimi kaldırıldı.
+                //KartCihazDurumunuGoster(kartId);
                 return;
             }
 
@@ -396,11 +369,8 @@ namespace CeyPASSCihazPanel.UI
                 : "❌ Tanımlama başarısız.");
 
             // Grid'i güncelle
-            //Task.Run(async () => await PersonelCihazDurumunuGoster(seciliPersonelId));
-            this.BeginInvoke(new Action(() =>
-            {
-                PersonelCihazDurumunuGoster(seciliPersonelId);
-            }));
+            // Cihaz durum gösterimi kaldırıldı.
+            //PersonelCihazDurumunuGoster(seciliPersonelId);
             return;
         }
         private void btnKisiSil_Click(object sender, EventArgs e)
@@ -481,10 +451,8 @@ namespace CeyPASSCihazPanel.UI
                 MessageBox.Show(silBasarili > 0 ? $"🗑 {silKartAdi} (UserID:{silKartId}) {silBasarili} cihazdan silindi." : "❌ Silme başarısız.");
 
                 //Task.Run(async () => await KartCihazDurumunuGoster(silKartId));
-                this.BeginInvoke(new Action(() =>
-                {
-                    KartCihazDurumunuGoster(silKartId);
-                }));
+                // Cihaz durum gösterimi kaldırıldı.
+                //KartCihazDurumunuGoster(silKartId);
                 return;
             }
 
@@ -569,10 +537,8 @@ namespace CeyPASSCihazPanel.UI
                     : "❌ Silme başarısız.");
 
             //Task.Run(async () => await PersonelCihazDurumunuGoster(silmePersonelId));
-            this.BeginInvoke(new Action(() =>
-            {
-                PersonelCihazDurumunuGoster(silmePersonelId);
-            }));
+            // Cihaz durum gösterimi kaldırıldı.
+            //PersonelCihazDurumunuGoster(silmePersonelId);
         }
         private void btnTopluTanimla_Click(object sender, EventArgs e)
         {
@@ -1001,13 +967,15 @@ namespace CeyPASSCihazPanel.UI
                 {
                     idBox.Text = k.KartId.ToString();
                     kartBox.Text = k.KartNo ?? "";
-                    await KartCihazDurumunuGoster(k.KartId);
+                    await Task.CompletedTask; // Async metod yapısını bozmamak için
+                    //KartCihazDurumunuGoster(k.KartId);
                 }
                 else
                 {
                     idBox.Clear();
                     kartBox.Clear();
-                    dgvCihazDurum.DataSource = null;
+                    idBox.Clear();
+                    kartBox.Clear();
                 }
                 return;
             }
@@ -1023,128 +991,83 @@ namespace CeyPASSCihazPanel.UI
                 else
                     kartBox.Clear();
 
-                await PersonelCihazDurumunuGoster(personelId);
+                await Task.CompletedTask; // Async metod yapısını bozmamak için
+                //PersonelCihazDurumunuGoster(personelId);
             }
             else
             {
                 idBox.Clear();
                 kartBox.Clear();
-                dgvCihazDurum.DataSource = null;
+                idBox.Clear();
+                kartBox.Clear();
             }
         }
-        private void InitializeDataGridView()
+        private void InitializeLogDataGridView()
         {
-            dgvCihazDurum.AutoGenerateColumns = false;
-            dgvCihazDurum.Columns.Clear();
+            dgvCihazLoglari.AutoGenerateColumns = false;
+            dgvCihazLoglari.Columns.Clear();
 
-            dgvCihazDurum.Columns.Add(new DataGridViewTextBoxColumn
+            dgvCihazLoglari.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "CihazAdi",
                 HeaderText = "Cihaz Adı",
                 Name = "CihazAdi",
                 ReadOnly = true,
-                FillWeight = 25
+                FillWeight = 20
             });
 
-            dgvCihazDurum.Columns.Add(new DataGridViewTextBoxColumn
+            dgvCihazLoglari.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "IPAdres",
-                HeaderText = "IP Adres",
-                Name = "IPAdres",
+                DataPropertyName = "ID",
+                HeaderText = "ID",
+                Name = "ID",
                 ReadOnly = true,
-                FillWeight = 25
+                FillWeight = 15
             });
 
-            dgvCihazDurum.Columns.Add(new DataGridViewCheckBoxColumn
+            dgvCihazLoglari.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "YetkiVarMi",
-                HeaderText = "DB Yetki",
-                Name = "YetkiVarMi",
+                DataPropertyName = "Ad",
+                HeaderText = "Ad",
+                Name = "Ad",
                 ReadOnly = true,
-                FillWeight = 25
+                FillWeight = 30
             });
 
-            dgvCihazDurum.Columns.Add(new DataGridViewCheckBoxColumn
+            dgvCihazLoglari.Columns.Add(new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "CihazaEklenmis",
-                HeaderText = "Cihazda Var",
-                Name = "CihazaEklenmis",
+                DataPropertyName = "KartNo",
+                HeaderText = "Kart No",
+                Name = "KartNo",
                 ReadOnly = true,
-                FillWeight = 25
+                FillWeight = 20
             });
 
-            dgvCihazDurum.DefaultCellStyle.SelectionBackColor = Color.FromArgb(52, 152, 219);
-            dgvCihazDurum.DefaultCellStyle.SelectionForeColor = Color.White;
-            dgvCihazDurum.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94);
-            dgvCihazDurum.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvCihazDurum.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dgvCihazDurum.EnableHeadersVisualStyles = false;
-        }
-        private async Task PersonelCihazDurumunuGoster(int personelId)
-        {
-            try
+            dgvCihazLoglari.Columns.Add(new DataGridViewCheckBoxColumn
             {
-                var durumListesi = _lookupService.GetPersonelCihazDurumlari(personelId, _firmaId);
-
-                // Cihazdan kontrol et
-                foreach (var durum in durumListesi)
-                {
-                    durum.CihazaEklenmis = await CihazaEklenmisMi(durum.IPAdres, personelId);
-                }
-
-                dgvCihazDurum.DataSource = new BindingSource { DataSource = durumListesi };
-            }
-            catch (Exception ex)
-            {
-                LogYaz($"Personel cihaz durumu gösterme hatası: {ex.Message}");
-            }
-        }
-        private async Task KartCihazDurumunuGoster(int kartId)
-        {
-            try
-            {
-                var kartDurumListesi = _lookupService.GetKartCihazDurumlari(kartId, _firmaId);
-
-                // Cihazdan kontrol et
-                foreach (var durum in kartDurumListesi)
-                {
-                    durum.CihazaEklenmis = await CihazaEklenmisMi(durum.IPAdres, kartId);
-                }
-
-                dgvCihazDurum.DataSource = new BindingSource { DataSource = kartDurumListesi };
-            }
-            catch (Exception ex)
-            {
-                LogYaz($"Kart cihaz durumu gösterme hatası: {ex.Message}");
-            }
-        }
-        private Task<bool> CihazaEklenmisMi(string ipAdresi, int kullaniciId)
-        {
-            return Task.Run(() =>
-            {
-                try
-                {
-                    if (!_deviceService.TryGetConnection(ipAdresi, out var baglanti) || !baglanti.Bagli)
-                        return false;
-
-                    var cihaz = baglanti.Device;
-                    const int makineNumarasi = 1;
-
-                    string isim = "", sifre = "", kartNumarasi = "";
-                    int yetki = 0;
-                    bool aktif = false;
-
-                    return cihaz.GetUserInfo(makineNumarasi, kullaniciId, ref isim, ref sifre, ref yetki, ref aktif);
-                }
-                catch
-                {
-                    return false;
-                }
+                DataPropertyName = "Aktif",
+                HeaderText = "Aktif",
+                Name = "Aktif",
+                ReadOnly = true,
+                FillWeight = 15
             });
+            
+            // Stil Ayarları
+            dgvCihazLoglari.RowTemplate.Height = 30;
+            dgvCihazLoglari.ColumnHeadersHeight = 35;
+            dgvCihazLoglari.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 249, 250);
+            dgvCihazLoglari.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            dgvCihazLoglari.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dgvCihazLoglari.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 73, 94);
+            dgvCihazLoglari.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCihazLoglari.EnableHeadersVisualStyles = false;
+            dgvCihazLoglari.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCihazLoglari.MultiSelect = false;
         }
         private void btnCihazKullanicilariGetir_Click(object sender, EventArgs e)
         {
-            cihazUserListBox.Items.Clear();
+            _tumLoglar.Clear();
+            dgvCihazLoglari.DataSource = null;
 
             var seciliIpListesi = new List<string>();
             foreach (var item in cihazSecimListesi.CheckedItems)
@@ -1159,49 +1082,117 @@ namespace CeyPASSCihazPanel.UI
                 return;
             }
 
-            foreach (var ipAdres in seciliIpListesi)
+            // UI Donmasın diye buton state değiştir
+            btnCihazKullanicilariGetir.Enabled = false;
+            btnCihazKullanicilariGetir.Text = "⏳ Lütfen Bekleyin...";
+
+            // İşlemi asenkron yapalım ki UI donmasın
+            Task.Run(() =>
             {
-                if (!_deviceService.TryGetConnection(ipAdres, out var baglanti) || !baglanti.Bagli)
+                var tempLogList = new List<CihazLogItem>();
+
+                foreach (var ipAdres in seciliIpListesi)
                 {
-                    LogYaz($"Cihaz bağlantısı yok: {ipAdres}");
-                    continue;
-                }
-
-                try
-                {
-                    var cihaz = baglanti.Device;
-                    const int cihazNo = 1;
-
-                    cihaz.EnableDevice(cihazNo, false);
-
-                    if (!cihaz.ReadAllUserID(cihazNo))
+                    if (!_deviceService.TryGetConnection(ipAdres, out var baglanti) || !baglanti.Bagli)
                     {
-                        cihaz.EnableDevice(cihazNo, true);
-                        LogYaz($"Kullanıcı listesi okunamadı: {baglanti.Info.CihazAdi} ({ipAdres})");
+                        LogYaz($"Cihaz bağlantısı yok: {ipAdres}");
                         continue;
                     }
 
-                    int kullaniciId = 0;
-                    string kullaniciAdi = "", kullaniciSifre = "";
-                    int kullaniciYetki = 0;
-                    bool kullaniciAktif = false;
-
-                    while (cihaz.GetAllUserInfo(cihazNo, ref kullaniciId, ref kullaniciAdi, ref kullaniciSifre, ref kullaniciYetki, ref kullaniciAktif))
+                    try
                     {
-                        string kartNumarasi = "";
-                        try { cihaz.GetStrCardNumber(out kartNumarasi); } catch { kartNumarasi = ""; }
+                        var cihaz = baglanti.Device;
+                        const int cihazNo = 1;
 
-                        cihazUserListBox.Items.Add(
-                            $"[{baglanti.Info.CihazAdi}] ID:{kullaniciId} | Ad:{kullaniciAdi} | Kart:{kartNumarasi} | Aktif:{kullaniciAktif}"
-                        );
+                        cihaz.EnableDevice(cihazNo, false);
+
+                        if (!cihaz.ReadAllUserID(cihazNo))
+                        {
+                            cihaz.EnableDevice(cihazNo, true);
+                            LogYaz($"Kullanıcı listesi okunamadı: {baglanti.Info.CihazAdi} ({ipAdres})");
+                            continue;
+                        }
+
+                        int kullaniciId = 0;
+                        string kullaniciAdi = "", kullaniciSifre = "";
+                        int kullaniciYetki = 0;
+                        bool kullaniciAktif = false;
+
+                        while (cihaz.GetAllUserInfo(cihazNo, ref kullaniciId, ref kullaniciAdi, ref kullaniciSifre, ref kullaniciYetki, ref kullaniciAktif))
+                        {
+                            string kartNumarasi = "";
+                            try { cihaz.GetStrCardNumber(out kartNumarasi); } catch { kartNumarasi = ""; }
+
+                            tempLogList.Add(new CihazLogItem
+                            {
+                                CihazAdi = baglanti.Info.CihazAdi,
+                                ID = kullaniciId,
+                                Ad = kullaniciAdi,
+                                KartNo = kartNumarasi,
+                                Aktif = kullaniciAktif
+                            });
+                        }
+
+                        cihaz.EnableDevice(cihazNo, true);
                     }
+                    catch (Exception ex)
+                    {
+                        LogYaz($"Kullanıcı listesi hatası ({ipAdres}): {ex.Message}");
+                    }
+                }
 
-                    cihaz.EnableDevice(cihazNo, true);
-                }
-                catch (Exception ex)
+                // UI Thread'e geri dön
+                this.BeginInvoke(new Action(() =>
                 {
-                    LogYaz($"Kullanıcı listesi hatası ({ipAdres}): {ex.Message}");
-                }
+                    _tumLoglar = tempLogList;
+                    dgvCihazLoglari.DataSource = _tumLoglar;
+                    
+                    btnCihazKullanicilariGetir.Enabled = true;
+                    btnCihazKullanicilariGetir.Text = "Cihazlardan Kullanıcıları Getir";
+                    
+                    MessageBox.Show($"Toplam {_tumLoglar.Count} kayıt getirildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }));
+            });
+        }
+
+        private void txtLogArama_TextChanged(object sender, EventArgs e)
+        {
+            if (txtLogArama.ForeColor == Color.Gray) return; // Placeholder aktifken arama yapma
+
+            string aramaMetni = txtLogArama.Text.ToLower().Trim();
+
+            if (string.IsNullOrEmpty(aramaMetni))
+            {
+                dgvCihazLoglari.DataSource = _tumLoglar;
+            }
+            else
+            {
+                var filtreliData = _tumLoglar.Where(x => 
+                    x.Ad.ToLower().Contains(aramaMetni) ||
+                    x.ID.ToString().Contains(aramaMetni) ||
+                    x.KartNo.ToLower().Contains(aramaMetni) ||
+                    x.CihazAdi.ToLower().Contains(aramaMetni)
+                ).ToList();
+
+                dgvCihazLoglari.DataSource = filtreliData;
+            }
+        }
+
+        private void txtLogArama_Enter(object sender, EventArgs e)
+        {
+            if (txtLogArama.Text == "🔍 Loglarda Ara..." && txtLogArama.ForeColor == Color.Gray)
+            {
+                txtLogArama.Text = "";
+                txtLogArama.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtLogArama_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtLogArama.Text))
+            {
+                txtLogArama.Text = "🔍 Loglarda Ara...";
+                txtLogArama.ForeColor = Color.Gray;
             }
         }
         private string ParseIp(object cihazItem)
@@ -2184,5 +2175,14 @@ namespace CeyPASSCihazPanel.UI
             }
             return secilenler;
         }
+    }
+
+    public class CihazLogItem
+    {
+        public string CihazAdi { get; set; }
+        public int ID { get; set; }
+        public string Ad { get; set; }
+        public string KartNo { get; set; }
+        public bool Aktif { get; set; }
     }
 }
