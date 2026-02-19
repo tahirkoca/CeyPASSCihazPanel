@@ -1532,7 +1532,7 @@ namespace CeyPASSCihazPanel.UI
                         $"⚠️ Seçilen tarih aralığında kayıt bulunamadı.\n\n" +
                         $"📅 {dtpOfflineBaslangic.Value:dd.MM.yyyy HH:mm} - {dtpOfflineBitis.Value:dd.MM.yyyy HH:mm}\n" +
                         $"🖥️ {secilenCihazlar.Count} cihaz kontrol edildi.\n\n" +
-                        $"💡 Listener servisiniz çalışıyor olabilir veya\n" +
+                        $"💡 Dinleyici servisiniz çalışıyor olabilir veya\n" +
                         $"   bu tarihte giriş/çıkış yapılmamış olabilir.",
                         "Kayıt Yok",
                         MessageBoxButtons.OK,
