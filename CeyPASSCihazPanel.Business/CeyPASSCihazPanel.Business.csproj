@@ -48,11 +48,13 @@
     <Compile Include="Abstractions\IAdminLookUpService.cs" />
     <Compile Include="Abstractions\IAuthService.cs" />
     <Compile Include="Abstractions\IBulkUploadService.cs" />
+    <Compile Include="Abstractions\ICihazGrupService.cs" />
     <Compile Include="Abstractions\IDeviceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminLookUpService.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\BulkUploadService.cs" />
+    <Compile Include="Services\CihazGrupService.cs" />
     <Compile Include="Services\DeviceService.cs" />
   </ItemGroup>
   <ItemGroup>

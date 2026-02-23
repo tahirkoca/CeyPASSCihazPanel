@@ -24,6 +24,7 @@ namespace CeyPASSCihazPanel.UI
         private readonly IAdminLookupService _lookupService;
         private readonly IDeviceService _deviceService;
         private readonly IBulkUploadService _bulkUploadService;
+        private readonly ICihazGrupService _cihazGrupService;
         private string _kullaniciAdi;
         private int? _firmaId;
         private List<Personel> _tumPersoneller;
@@ -39,7 +40,11 @@ namespace CeyPASSCihazPanel.UI
                 new SqlKisilerBulkRepository(),
                 new SqlPuantajsizKartBulkRepository(),
                 new SqlYemekhaneGirisLimitRepository());
+            _cihazGrupService = new CihazGrupService(new SqlCihazGrupRepository());
+            
             InitializeComponent();
+            
+            InitializeYetkiGrupComboBox();
         }
 
         public void SetContext(string kullaniciAdi, int? firmaId)
@@ -72,6 +77,7 @@ namespace CeyPASSCihazPanel.UI
                 OfflineVeriTabBaslat();
                 CihazYonetimiTabBaslat();
                 InitializeLogDataGridView();
+                InitializeCihazGruplariTab();
             }
             catch (Exception ex)
             {
@@ -1228,6 +1234,7 @@ namespace CeyPASSCihazPanel.UI
             {
                 _tumCihazlar = _lookupService.GetAktifCihazlar(_firmaId).ToList();
                 YetkiPersonelKartListesiniYukle();
+                YetkiGruplariniKomboyaYukle();
             }
             catch (Exception ex)
             {
@@ -2355,24 +2362,331 @@ namespace CeyPASSCihazPanel.UI
 
         private void btnTopluYemekhaneYukle_Click(object sender, EventArgs e)
         {
-            using (var ofd = new OpenFileDialog { Filter = "Excel Dosyaları|*.xlsx;*.xls", Title = "Toplu Yemekhane Limit Listesi Seç" })
+            using (var ofd = new OpenFileDialog())
             {
+                ofd.Filter = "Excel Dosyaları|*.xls;*.xlsx";
+                ofd.Title = "Toplu Yemekhane Yükleme Exceli Seçiniz";
                 if (ofd.ShowDialog() != DialogResult.OK) return;
+
                 try
                 {
                     DataTable dt = ReadExcelFile(ofd.FileName);
-                    if (MessageBox.Show($"Lütfen bu işlemler öncesi sistem admini ile iletişimde olunuz, işlem geri alınamaz! {dt.Rows.Count} kayıt yüklenecek. Emin misiniz?",
-                        "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+                    if (dt == null || dt.Rows.Count == 0) return;
+
+                    var onayla = MessageBox.Show($"{dt.Rows.Count} yemekhane limiti bulundu. Veritabanına aktarmak istediğinize emin misiniz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (onayla != DialogResult.Yes) return;
 
                     (int basarili, int hatali) = _bulkUploadService.BulkUpsertYemekhane(dt);
-                    MessageBox.Show($"İşlem Tamamlandı.\nBaşarılı: {basarili}\nHatalı: {hatali}", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    MessageBox.Show($"İşlem Tamamlandı!\n\nBaşarılı: {basarili}\nHatalı: {hatali}", "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Dosya okuma hatası: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Yükleme sırasında hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
+        #region Cihaz Grupları Yönetimi ve Yetki Kombosu
+
+        private ComboBox cmbYetkiGrupSecimi;
+        private ListBox lstCihazGruplari;
+        private TextBox txtYeniGrupAdi;
+        private CheckedListBox clbGrupCihazlari;
+        private Button btnGrupEkle, btnGrupSil, btnGrupKaydet;
+        private bool _grupCihazYukleniyor = false;
+
+        private void InitializeYetkiGrupComboBox()
+        {
+            TableLayoutPanel tlpTop = new TableLayoutPanel
+            {
+                Dock = DockStyle.Top,
+                Height = 35,
+                ColumnCount = 2,
+                Margin = new Padding(0, 0, 0, 10)
+            };
+            tlpTop.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            tlpTop.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+
+            Label lblYetkiGruplari = new Label
+            {
+                Text = "Yetki Grupları :",
+                Font = new Font("Segoe UI Semibold", 11F),
+                AutoSize = true,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Padding = new Padding(0, 0, 5, 0)
+            };
+
+            cmbYetkiGrupSecimi = new ComboBox
+            {
+                Dock = DockStyle.Fill,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Font = new Font("Segoe UI", 11F)
+            };
+            cmbYetkiGrupSecimi.SelectedIndexChanged += CmbYetkiGrupSecimi_SelectedIndexChanged;
+
+            tlpTop.Controls.Add(lblYetkiGruplari, 0, 0);
+            tlpTop.Controls.Add(cmbYetkiGrupSecimi, 1, 0);
+
+            var parent = clbYetkiCihazlar.Parent;
+            if (parent is TableLayoutPanel tlp)
+            {
+                var pos = tlp.GetPositionFromControl(clbYetkiCihazlar);
+                Panel pnl = new Panel { Dock = DockStyle.Fill, Margin = new Padding(0) };
+                tlp.Controls.Remove(clbYetkiCihazlar);
+                
+                clbYetkiCihazlar.Dock = DockStyle.Fill;
+                pnl.Controls.Add(clbYetkiCihazlar); 
+                pnl.Controls.Add(tlpTop); 
+
+                tlp.Controls.Add(pnl, pos.Column, pos.Row);
+            }
+        }
+
+        private void InitializeCihazGruplariTab()
+        {
+            TabPage tabGrupYonetimi = new TabPage("Grup Yönetimi");
+            tabGrupYonetimi.Name = "tabGrupYonetimi";
+            tabGrupYonetimi.BackColor = Color.FromArgb(245, 247, 250);
+
+            TableLayoutPanel tlpMain = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, Padding = new Padding(10) };
+            tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tlpMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
+
+            GroupBox gbGruplar = new GroupBox { Text = "CİHAZ GRUPLARI", Dock = DockStyle.Fill, Font = new Font("Segoe UI Semibold", 12F), ForeColor = Color.FromArgb(44, 62, 80) };
+            
+            lstCihazGruplari = new ListBox { Dock = DockStyle.Fill, Font = new Font("Segoe UI", 11F), IntegralHeight = false };
+            lstCihazGruplari.SelectedIndexChanged += LstCihazGruplari_SelectedIndexChanged;
+
+            Panel pnlGrupEkle = new Panel { Dock = DockStyle.Bottom, Height = 60 };
+            txtYeniGrupAdi = new TextBox { Width = 200, Location = new Point(10, 20), Font = new Font("Segoe UI", 11F) };
+            btnGrupEkle = new Button { Text = "Ekle", BackColor = Color.FromArgb(46, 204, 113), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Width = 80, Height = 35, Location = new Point(220, 18), Font = new Font("Segoe UI", 10F) };
+            btnGrupSil = new Button { Text = "Sil", BackColor = Color.FromArgb(231, 76, 60), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Width = 80, Height = 35, Location = new Point(310, 18), Font = new Font("Segoe UI", 10F) };
+
+            btnGrupEkle.Click += BtnGrupEkle_Click;
+            btnGrupSil.Click += BtnGrupSil_Click;
+
+            pnlGrupEkle.Controls.Add(txtYeniGrupAdi);
+            pnlGrupEkle.Controls.Add(btnGrupEkle);
+            pnlGrupEkle.Controls.Add(btnGrupSil);
+
+            Panel pnlListWrapper = new Panel { Dock = DockStyle.Fill, Padding = new Padding(10) };
+            pnlListWrapper.Controls.Add(lstCihazGruplari);
+
+            gbGruplar.Controls.Add(pnlListWrapper);
+            gbGruplar.Controls.Add(pnlGrupEkle);
+
+            GroupBox gbCihazlar = new GroupBox { Text = "GRUBA AİT CİHAZLAR", Dock = DockStyle.Fill, Font = new Font("Segoe UI Semibold", 12F), ForeColor = Color.FromArgb(44, 62, 80) };
+            
+            clbGrupCihazlari = new CheckedListBox { Dock = DockStyle.Fill, Font = new Font("Segoe UI", 11F), CheckOnClick = true, IntegralHeight = false };
+
+            btnGrupKaydet = new Button { Text = "CİHAZLARI GRUBA KAYDET", Dock = DockStyle.Bottom, Height = 50, BackColor = Color.FromArgb(52, 152, 219), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI Semibold", 11F) };
+            btnGrupKaydet.Click += BtnGrupKaydet_Click;
+
+            Panel pnlCihazWrapper = new Panel { Dock = DockStyle.Fill, Padding = new Padding(10) };
+            pnlCihazWrapper.Controls.Add(clbGrupCihazlari);
+
+            Button btnTumunuSec = new Button { Text = "Tümünü Seç", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.White, ForeColor = Color.FromArgb(44, 62, 80), Font = new Font("Segoe UI Semibold", 10F), Margin = new Padding(0, 0, 5, 0) };
+            Button btnTumunuKaldir = new Button { Text = "Tümünü Kaldır", Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, BackColor = Color.White, ForeColor = Color.FromArgb(44, 62, 80), Font = new Font("Segoe UI Semibold", 10F), Margin = new Padding(5, 0, 5, 0) };
+            
+            btnTumunuSec.Click += (s, e) => { for (int i = 0; i < clbGrupCihazlari.Items.Count; i++) clbGrupCihazlari.SetItemChecked(i, true); };
+            btnTumunuKaldir.Click += (s, e) => { for (int i = 0; i < clbGrupCihazlari.Items.Count; i++) clbGrupCihazlari.SetItemChecked(i, false); };
+            
+            TableLayoutPanel tlpCihazSecim = new TableLayoutPanel { Dock = DockStyle.Bottom, Height = 45, Padding = new Padding(10, 0, 10, 5), ColumnCount = 3 };
+            tlpCihazSecim.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpCihazSecim.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tlpCihazSecim.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.34F));
+            
+            btnGrupKaydet = new Button { Text = "CİHAZLARI GRUBA KAYDET", Dock = DockStyle.Fill, BackColor = Color.FromArgb(52, 152, 219), ForeColor = Color.White, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI Semibold", 10F), Margin = new Padding(5, 0, 0, 0) };
+            btnGrupKaydet.Click += BtnGrupKaydet_Click;
+
+            tlpCihazSecim.Controls.Add(btnTumunuSec, 0, 0);
+            tlpCihazSecim.Controls.Add(btnTumunuKaldir, 1, 0);
+            tlpCihazSecim.Controls.Add(btnGrupKaydet, 2, 0);
+
+            gbCihazlar.Controls.Add(pnlCihazWrapper);
+            gbCihazlar.Controls.Add(tlpCihazSecim);
+
+            tlpMain.Controls.Add(gbGruplar, 0, 0);
+            tlpMain.Controls.Add(gbCihazlar, 1, 0);
+
+            tabGrupYonetimi.Controls.Add(tlpMain);
+            int index = tabControl.TabPages.IndexOf(tabCihazIslemleri);
+            if (index >= 0)
+            {
+                tabControl.TabPages.Insert(index + 1, tabGrupYonetimi);
+            }
+            else
+            {
+                tabControl.TabPages.Add(tabGrupYonetimi);
+            }
+            // Bazı durumlarda çalışma zamanında oluşturulan tabların görünmesi için Parent'a .Controls.Add demek de gerekebilir
+            if (!tabControl.Controls.Contains(tabGrupYonetimi))
+            {
+                tabControl.Controls.Add(tabGrupYonetimi);
+            }
+
+            tabControl.SelectedIndexChanged += (s, e) => {
+                if (tabControl.SelectedTab == tabGrupYonetimi)
+                {
+                    CihazGruplariniYukle();
+                    GrupCihazListesiniYukle();
+                }
+            };
+        }
+
+        private void CihazGruplariniYukle()
+        {
+            lstCihazGruplari.Items.Clear();
+            var gruplar = _cihazGrupService.GetGruplar(_firmaId);
+            foreach (var g in gruplar)
+            {
+                lstCihazGruplari.Items.Add(new { Text = g.GrupAdi, Value = g.Id });
+            }
+            lstCihazGruplari.DisplayMember = "Text";
+            lstCihazGruplari.ValueMember = "Value";
+        }
+
+        private void GrupCihazListesiniYukle()
+        {
+            clbGrupCihazlari.Items.Clear();
+            var cihazlar = _lookupService.GetAktifCihazlar(_firmaId);
+            foreach (var c in cihazlar)
+            {
+                clbGrupCihazlari.Items.Add(new CihazCheckItem { CihazAdi = c.CihazAdi, CihazId = c.CihazId, IPAdres = c.IP, DisplayText = $"{c.CihazAdi} ({c.IP})" });
+            }
+        }
+
+        private void BtnGrupEkle_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtYeniGrupAdi.Text)) return;
+            
+            try
+            {
+                _cihazGrupService.EkleGrup(new CihazGrubu { GrupAdi = txtYeniGrupAdi.Text.Trim(), FirmaId = _firmaId });
+                txtYeniGrupAdi.Text = "";
+                CihazGruplariniYukle();
+                YetkiGruplariniKomboyaYukle(); // Yetki sekmesi de güncellensin
+            }
+            catch (Exception ex) { MessageBox.Show("Hata: " + ex.Message); }
+        }
+
+        private void BtnGrupSil_Click(object sender, EventArgs e)
+        {
+            if (lstCihazGruplari.SelectedItem == null) return;
+            dynamic sel = lstCihazGruplari.SelectedItem;
+            
+            if (MessageBox.Show($"'{sel.Text}' grubunu silmek istediğinize emin misiniz?", "Onay", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    _cihazGrupService.SilGrup(sel.Value);
+                    CihazGruplariniYukle();
+                    YetkiGruplariniKomboyaYukle();
+                }
+                catch (Exception ex) { MessageBox.Show("Hata: " + ex.Message); }
+            }
+        }
+
+        private void LstCihazGruplari_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstCihazGruplari.SelectedItem == null)
+            {
+                for (int i = 0; i < clbGrupCihazlari.Items.Count; i++)
+                    clbGrupCihazlari.SetItemChecked(i, false);
+                return;
+            }
+
+            _grupCihazYukleniyor = true;
+            dynamic sel = lstCihazGruplari.SelectedItem;
+            var detaylar = _cihazGrupService.GetGrupDetaylari((int)sel.Value).ToList();
+
+            for (int i = 0; i < clbGrupCihazlari.Items.Count; i++)
+            {
+                var item = clbGrupCihazlari.Items[i] as CihazCheckItem;
+                clbGrupCihazlari.SetItemChecked(i, detaylar.Any(d => d.CihazId == item.CihazId));
+            }
+            _grupCihazYukleniyor = false;
+        }
+
+        private void BtnGrupKaydet_Click(object sender, EventArgs e)
+        {
+            if (lstCihazGruplari.SelectedItem == null)
+            {
+                MessageBox.Show("Lütfen önce listeden bir grup seçin.");
+                return;
+            }
+
+            dynamic sel = lstCihazGruplari.SelectedItem;
+            var secilenIdler = new List<int>();
+            for (int i = 0; i < clbGrupCihazlari.Items.Count; i++)
+            {
+                if (clbGrupCihazlari.GetItemChecked(i))
+                {
+                    var item = clbGrupCihazlari.Items[i] as CihazCheckItem;
+                    secilenIdler.Add(item.CihazId);
+                }
+            }
+
+            try
+            {
+                _cihazGrupService.KaydetGrupCihazlari(sel.Value, secilenIdler);
+                YetkiGruplariniKomboyaYukle(); // Güncellediysek yetki tabında da liste taze kalsın
+                MessageBox.Show("Cihazlar gruba kaydedildi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex) { MessageBox.Show("Hata: " + ex.Message); }
+        }
+
+        private void YetkiGruplariniKomboyaYukle()
+        {
+            if (cmbYetkiGrupSecimi == null) return;
+
+            cmbYetkiGrupSecimi.Items.Clear();
+
+            try
+            {
+                var gruplar = _cihazGrupService.GetGruplar(_firmaId);
+                foreach (var g in gruplar)
+                {
+                    cmbYetkiGrupSecimi.Items.Add(new { Text = g.GrupAdi, Value = g.Id });
+                }
+                cmbYetkiGrupSecimi.DisplayMember = "Text";
+                cmbYetkiGrupSecimi.ValueMember = "Value";
+            }
+            catch { }
+        }
+
+        private void CmbYetkiGrupSecimi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbYetkiGrupSecimi.SelectedItem == null) return;
+            dynamic sel = cmbYetkiGrupSecimi.SelectedItem;
+            int grupId = sel.Value;
+
+            if (grupId == -1) // Tüm cihazlar
+            {
+                for (int i = 0; i < clbYetkiCihazlar.Items.Count; i++)
+                    clbYetkiCihazlar.SetItemChecked(i, true);
+                return;
+            }
+            else if (grupId == -2) // Temizle
+            {
+                for (int i = 0; i < clbYetkiCihazlar.Items.Count; i++)
+                    clbYetkiCihazlar.SetItemChecked(i, false);
+                return;
+            }
+
+            // Normal bir grup seçildi
+            var detaylar = _cihazGrupService.GetGrupDetaylari(grupId).ToList();
+            
+            for (int i = 0; i < clbYetkiCihazlar.Items.Count; i++)
+            {
+                var item = clbYetkiCihazlar.Items[i] as CihazCheckItem;
+                clbYetkiCihazlar.SetItemChecked(i, detaylar.Any(d => d.CihazId == item.CihazId));
+            }
+        }
+
+        #endregion
     }
 
     public class CihazLogItem
