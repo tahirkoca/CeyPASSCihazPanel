@@ -1,4 +1,6 @@
 ﻿using CeyPASSCihazPanel.Business.Abstractions;
+using CeyPASSCihazPanel.Business.Services;
+using CeyPASSCihazPanel.DAL.Repositories;
 using CeyPASSCihazPanel.Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,11 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
+using System.IO;
+using System.Data.SqlClient;
+using System.Configuration;
+using CeyPASSCihazPanel.UI.Helpers;
 
 namespace CeyPASSCihazPanel.UI
 {
@@ -16,6 +23,7 @@ namespace CeyPASSCihazPanel.UI
     {
         private readonly IAdminLookupService _lookupService;
         private readonly IDeviceService _deviceService;
+        private readonly IBulkUploadService _bulkUploadService;
         private string _kullaniciAdi;
         private int? _firmaId;
         private List<Personel> _tumPersoneller;
@@ -27,6 +35,10 @@ namespace CeyPASSCihazPanel.UI
         {
             _lookupService = lookupService;
             _deviceService = deviceService;
+            _bulkUploadService = new BulkUploadService(
+                new SqlKisilerBulkRepository(),
+                new SqlPuantajsizKartBulkRepository(),
+                new SqlYemekhaneGirisLimitRepository());
             InitializeComponent();
         }
 
@@ -2174,6 +2186,192 @@ namespace CeyPASSCihazPanel.UI
                 }
             }
             return secilenler;
+        }
+        private DataTable ReadExcelFile(string path)
+        {
+            DataTable dt = new DataTable();
+            string connStr = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Extended Properties='Excel 12.0 Xml;HDR=YES;'";
+            
+            using (OleDbConnection conn = new OleDbConnection(connStr))
+            {
+                conn.Open();
+                DataTable schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                string sheetName = schemaTable.Rows[0]["TABLE_NAME"].ToString();
+                
+                string query = $"SELECT * FROM [{sheetName}]";
+                using (OleDbDataAdapter da = new OleDbDataAdapter(query, conn))
+                {
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        private void btnTopluKisiYukle_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog { Filter = "Excel Dosyaları|*.xlsx;*.xls", Title = "Toplu Kişi Listesi Seç" })
+            {
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                try
+                {
+                    DataTable dt = ReadExcelFile(ofd.FileName);
+                    if (MessageBox.Show($"Lütfen bu işlemler öncesi sistem admini ile iletişimde olunuz, işlem geri alınamaz! {dt.Rows.Count} kişi yüklenecek. Emin misiniz?",
+                        "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+
+                    (int basarili, int hatali) = _bulkUploadService.BulkUpsertKisiler(dt);
+                    MessageBox.Show($"İşlem Tamamlandı.\nBaşarılı: {basarili}\nHatalı: {hatali}", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Dosya okuma hatası: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnTopluKartYukle_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog { Filter = "Excel Dosyaları|*.xlsx;*.xls", Title = "Toplu Kart Listesi Seç" })
+            {
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                try
+                {
+                    DataTable dt = ReadExcelFile(ofd.FileName);
+                    if (MessageBox.Show($"Lütfen bu işlemler öncesi sistem admini ile iletişimde olunuz, işlem geri alınamaz! {dt.Rows.Count} kart yüklenecek. Emin misiniz?",
+                        "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+
+                    (int basarili, int hatali) = _bulkUploadService.BulkUpsertKartlar(dt);
+                    MessageBox.Show($"İşlem Tamamlandı.\nBaşarılı: {basarili}\nHatalı: {hatali}", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Dosya okuma hatası: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnTemplateKisi_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "⚠️ Dikkat: İndirilen şablonda örnek veriler bulunmaktadır.\nYükleme yapmadan önce örnek satırı silip kendi verilerinizi giriniz.",
+                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (var sfd = new SaveFileDialog { Filter = "Excel Dosyası|*.xlsx", Title = "Kişi Yükleme Şablonu İndir", FileName = "PersonelSablon.xlsx" })
+            {
+                if (sfd.ShowDialog() != DialogResult.OK) return;
+                try
+                {
+                    MiniExcel.CreateXlsx(sfd.FileName, _bulkUploadService.GetKisiTemplate());
+                    MessageBox.Show("Şablon başarıyla oluşturuldu.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Şablon oluşturma hatası: {ex.Message}", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnTemplateKart_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "⚠️ Dikkat: İndirilen şablonda örnek veriler bulunmaktadır.\nYükleme yapmadan önce örnek satırı silip kendi verilerinizi giriniz.",
+                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (var sfd = new SaveFileDialog { Filter = "Excel Dosyası|*.xlsx", Title = "Kart Yükleme Şablonu İndir", FileName = "KartSablon.xlsx" })
+            {
+                if (sfd.ShowDialog() != DialogResult.OK) return;
+                try
+                {
+                    MiniExcel.CreateXlsx(sfd.FileName, _bulkUploadService.GetKartTemplate());
+                    MessageBox.Show("Şablon başarıyla oluşturuldu.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Şablon oluşturma hatası: {ex.Message}", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnLogExcelExport_Click(object sender, EventArgs e)
+        {
+            if (dgvCihazLoglari.Rows.Count == 0)
+            {
+                MessageBox.Show("Dışa aktarılacak veri yok.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (SaveFileDialog sfd = new SaveFileDialog { Filter = "Excel Dosyası|*.xlsx", Title = "Logları Kaydet", FileName = $"CihazLoglari_{DateTime.Now:yyyyMMdd_HHmm}.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        DataTable dt = new DataTable();
+                        foreach (DataGridViewColumn col in dgvCihazLoglari.Columns)
+                        {
+                            dt.Columns.Add(col.HeaderText);
+                        }
+
+                        foreach (DataGridViewRow row in dgvCihazLoglari.Rows)
+                        {
+                            if (!row.IsNewRow)
+                            {
+                                DataRow dr = dt.NewRow();
+                                foreach (DataGridViewColumn col in dgvCihazLoglari.Columns)
+                                {
+                                    dr[col.HeaderText] = row.Cells[col.Name].Value?.ToString() ?? "";
+                                }
+                                dt.Rows.Add(dr);
+                            }
+                        }
+
+                        MiniExcel.CreateXlsx(sfd.FileName, dt);
+                        MessageBox.Show("Dosya başarıyla Excel (.xlsx) olarak kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Dosya kaydetme hatası: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnTemplateYemekhane_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "⚠️ Dikkat: İndirilen şablonda örnek veriler bulunmaktadır.\nYükleme yapmadan önce örnek satırı silip kendi verilerinizi giriniz.",
+                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (var sfd = new SaveFileDialog { Filter = "Excel Dosyası|*.xlsx", Title = "Yemekhane Limit Şablonu İndir", FileName = "YemekhaneGirisLimitlerSablon.xlsx" })
+            {
+                if (sfd.ShowDialog() != DialogResult.OK) return;
+                try
+                {
+                    MiniExcel.CreateXlsx(sfd.FileName, _bulkUploadService.GetYemekhaneTemplate());
+                    MessageBox.Show("Şablon başarıyla oluşturuldu.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Şablon oluşturma hatası: {ex.Message}", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnTopluYemekhaneYukle_Click(object sender, EventArgs e)
+        {
+            using (var ofd = new OpenFileDialog { Filter = "Excel Dosyaları|*.xlsx;*.xls", Title = "Toplu Yemekhane Limit Listesi Seç" })
+            {
+                if (ofd.ShowDialog() != DialogResult.OK) return;
+                try
+                {
+                    DataTable dt = ReadExcelFile(ofd.FileName);
+                    if (MessageBox.Show($"Lütfen bu işlemler öncesi sistem admini ile iletişimde olunuz, işlem geri alınamaz! {dt.Rows.Count} kayıt yüklenecek. Emin misiniz?",
+                        "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+
+                    (int basarili, int hatali) = _bulkUploadService.BulkUpsertYemekhane(dt);
+                    MessageBox.Show($"İşlem Tamamlandı.\nBaşarılı: {basarili}\nHatalı: {hatali}", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Dosya okuma hatası: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 

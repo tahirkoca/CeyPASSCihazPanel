@@ -59,7 +59,9 @@
     <Compile Include="Models\PersonelCihazDurum.cs" />
     <Compile Include="Models\PersonelItem.cs" />
     <Compile Include="Models\PuantajsizKart.cs" />
+    <Compile Include="Models\PuantajsizKartBulk.cs" />
     <Compile Include="Models\Terminal.cs" />
+    <Compile Include="Models\YemekhaneGirisLimiti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
