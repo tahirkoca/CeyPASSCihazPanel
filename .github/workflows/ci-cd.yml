@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  UPDATE_BASE_URL: 'http://212.156.146.198/CeyPASS-CihazPanel-Updates'
+  UPDATE_BASE_URL: 'http://192.168.0.23/CeyPASS-CihazPanel-Updates'
 
 jobs:
   build-and-deploy:
