@@ -1,3 +1,6 @@
+# CeyPASSCihazPanel CI/CD: Build -> Zip (Release içeriği) -> update.xml -> Sunucuya kopyala
+# Runner: Self-hosted (label: cihaz-panel-deploy)
+
 name: Cihaz Panel Build and Deploy
 
 on:
@@ -11,59 +14,68 @@ env:
 
 jobs:
   build-and-deploy:
-    # Yeni oluşturduğumuz cihaz-panel runner'ını hedefliyoruz
     runs-on: [ self-hosted, cihaz-panel-deploy ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+      # .NET Framework projeleri için MSBuild kurulumu gerekir
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
       - name: AssemblyInfo'dan sürüm oku
         id: version
         shell: powershell
         run: |
-          # Proje klasör yapına göre yolu kontrol et: CeyPASS.CihazPanel.UI veya benzeri
+          # Klasör yapısı: CeyPASSCihazPanel.UI\Properties\AssemblyInfo.cs
           $content = Get-Content 'CeyPASSCihazPanel.UI\Properties\AssemblyInfo.cs' -Raw
           if ($content -match 'AssemblyVersion\("([^"]+)"\)') {
             $ver = $Matches[1]
             Write-Host "Bulunan Versiyon: $ver"
             "VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Append
-          } else {
-            Write-Error "AssemblyInfo.cs içinde versiyon bulunamadı!"
-            exit 1
+            "version=$ver" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           }
 
-      - name: Build Release
-        run: dotnet build CeyPASSCihazPanel.sln -c Release --no-incremental
+      - name: NuGet Paketlerini Geri Yükle
+        run: nuget restore CeyPASSCihazPanel.sln
 
-      - name: Zip Paketini Hazırla
+      - name: Build Release (MSBuild)
+        run: msbuild CeyPASSCihazPanel.sln /p:Configuration=Release /p:Platform="Any CPU"
+
+      - name: Zip (Release klasörü içeriği)
+        id: zip
         shell: powershell
         run: |
           $version = $env:VERSION
-          # Derleme çıktısının olduğu yolu kontrol et (net8.0-windows)
-          $src = "CeyPASSCihazPanel.UI\bin\Release\net8.0-windows"
-          $zipName = "CeyPASSCihazPanel-v$version.zip"
+          # .NET 8 olmadığı için yol: bin\Release
+          $src = "CeyPASSCihazPanel.UI\bin\Release"
+          $zipName = "CeyPASSCihazPanel.v$version.zip"
+          
+          if (-not (Test-Path $src)) {
+            Write-Error "Build çıktısı bulunamadı: $src"
+            exit 1
+          }
+          
           Compress-Archive -Path "$src\*" -DestinationPath $zipName -Force
-          echo "ZIP_NAME=$zipName" >> $env:GITHUB_ENV
+          echo "zip_name=$zipName" >> $env:GITHUB_OUTPUT
 
-      - name: update.xml Oluştur
+      - name: update.xml oluştur
         shell: powershell
         run: |
           $version = $env:VERSION
-          $url = "${{ env.UPDATE_BASE_URL }}/$env:ZIP_NAME"
+          $zipName = "${{ steps.zip.outputs.zip_name }}"
+          $url = "${{ env.UPDATE_BASE_URL }}/$zipName"
           $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$version</version><url>$url</url><mandatory>false</mandatory></item>"
           Set-Content -Path "update.xml" -Value $xml -Encoding UTF8
 
-      - name: HFS Klasörüne Kopyala
+      - name: Sunucuya kopyala
         shell: powershell
         run: |
           $dest = 'C:\CeyPASS-CihazPanel-Updates'
-          if (-not (Test-Path $dest)) { New-File -ItemType Directory -Path $dest -Force }
-          # Dosyaları sunucudaki fiziksel klasöre taşıyoruz
-          Copy-Item -Path "$env:ZIP_NAME" -Destination $dest -Force
+          if (-not (Test-Path $dest)) {
+            New-Item -ItemType Directory -Path $dest -Force
+          }
+          $zipFile = "${{ steps.zip.outputs.zip_name }}"
+          Copy-Item -Path $zipFile -Destination $dest -Force
           Copy-Item -Path "update.xml" -Destination $dest -Force
-          Write-Host "Dağıtım $dest klasörüne başarıyla tamamlandı."
+          Write-Host "Dağıtım tamamlandı: $dest"
