@@ -19,7 +19,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: NuGet Restore
-        run: nuget restore CeyPASSCihazPanel.sln
+        run: C:\nuget\nuget.exe restore CeyPASSCihazPanel.sln
 
       - name: AssemblyInfo'dan sürüm oku
         id: version
