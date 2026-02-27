@@ -19,6 +19,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: NuGet Restore
+        # NuGet'i indirdiğin tam yolu kullanıyoruz
         run: C:\nuget\nuget.exe restore CeyPASSCihazPanel.sln
 
       - name: AssemblyInfo'dan sürüm oku
@@ -34,7 +35,7 @@ jobs:
       - name: Build Release
         run: msbuild CeyPASSCihazPanel.sln /p:Configuration=Release /p:Platform="Any CPU"
 
-      - name: Zip
+      - name: Zip (bin\Release içeriği)
         id: zip
         shell: powershell
         run: |
