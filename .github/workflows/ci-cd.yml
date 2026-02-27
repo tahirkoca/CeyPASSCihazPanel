@@ -1,6 +1,4 @@
-# CeyPASSCihazPanel CI/CD: DLL Kopyalama -> MSBuild -> Zip -> HFS
-# Runner: Self-hosted (label: cihaz-panel-deploy)
-
+# CeyPASSCihazPanel CI/CD: DLL Hazırlığı -> MSBuild -> Paketleme -> HFS
 name: Cihaz Panel Build and Deploy
 
 on:
@@ -9,7 +7,6 @@ on:
   workflow_dispatch:
 
 env:
-  # Sunucu dış IP adresi ve HFS klasör yolu
   UPDATE_BASE_URL: 'http://192.168.0.23/CeyPASS-CihazPanel-Updates'
   DEPLOY_PATH: 'C:\CeyPASS-CihazPanel-Updates'
 
@@ -23,21 +20,21 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: Bağımlı DLL'i Projeye Tanıt (zkemkeeper)
+      - name: Bağımlı DLL'i Hazırla (zkemkeeper)
         shell: powershell
         run: |
-          # MSBuild'in DLL'i bulabilmesi için referans klasörünü hazırlıyoruz
+          # Projenin derleme sırasında DLL'i arayacağı Libs klasörünü oluşturuyoruz
           $libPath = "CeyPASSCihazPanel.UI\Libs"
           if (-not (Test-Path $libPath)) { New-Item -ItemType Directory -Path $libPath -Force }
           
-          # Sunucundaki DLL'in yolu (Eğer farklıysa burayı güncelle)
+          # Sunucunda zaten var olan DLL'in yolu
           $sourceDll = "C:\Windows\SysWOW64\zkemkeeper.dll" 
           
           if (Test-Path $sourceDll) {
             Copy-Item -Path $sourceDll -Destination $libPath -Force
-            Write-Host "zkemkeeper.dll başarıyla Libs klasörüne kopyalandı."
+            Write-Host "DLL başarıyla proje klasörüne kopyalandı."
           } else {
-            Write-Error "DLL sunucuda bulunamadı! Lütfen yolu kontrol et: $sourceDll"
+            Write-Error "DLL sunucuda bulunamadı! Yol: $sourceDll"
             exit 1
           }
 
@@ -52,7 +49,6 @@ jobs:
           $content = Get-Content $path -Raw
           if ($content -match 'AssemblyVersion\("([^"]+)"\)') {
             $ver = $Matches[1]
-            Write-Host "Bulunan Versiyon: $ver"
             "VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
 
@@ -65,21 +61,17 @@ jobs:
         run: |
           $src = "CeyPASSCihazPanel.UI\bin\Release"
           $zipName = "CeyPASSCihazPanel.v$env:VERSION.zip"
-          if (-not (Test-Path $src)) { Write-Error "Build çıktısı yok!"; exit 1 }
-          
           Compress-Archive -Path "$src\*" -DestinationPath $zipName -Force
           echo "zip_name=$zipName" >> $env:GITHUB_OUTPUT
 
       - name: update.xml ve Dağıtım
         shell: powershell
         run: |
-          # update.xml içeriğini oluştur
           $zipName = "${{ steps.zip.outputs.zip_name }}"
           $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$env:VERSION</version><url>${{ env.UPDATE_BASE_URL }}/$zipName</url><mandatory>false</mandatory></item>"
           Set-Content -Path "update.xml" -Value $xml -Encoding UTF8
           
-          # HFS klasörüne kopyala
+          # HFS klasörüne taşı
           if (-not (Test-Path $env:DEPLOY_PATH)) { New-Item -ItemType Directory -Path $env:DEPLOY_PATH -Force }
           Copy-Item -Path $zipName -Destination $env:DEPLOY_PATH -Force
           Copy-Item -Path "update.xml" -Destination $env:DEPLOY_PATH -Force
-          Write-Host "Dosyalar $env:DEPLOY_PATH klasörüne başarıyla taşındı."
