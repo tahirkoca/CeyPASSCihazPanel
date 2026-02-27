@@ -1,3 +1,6 @@
+# CeyPASSCihazPanel CI/CD: DLL Kopyalama -> MSBuild -> Zip -> HFS
+# Runner: Self-hosted (label: cihaz-panel-deploy)
+
 name: Cihaz Panel Build and Deploy
 
 on:
@@ -6,7 +9,9 @@ on:
   workflow_dispatch:
 
 env:
+  # Sunucu dış IP adresi ve HFS klasör yolu
   UPDATE_BASE_URL: 'http://192.168.0.23/CeyPASS-CihazPanel-Updates'
+  DEPLOY_PATH: 'C:\CeyPASS-CihazPanel-Updates'
 
 jobs:
   build-and-deploy:
@@ -18,49 +23,63 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: NuGet Restore
+      - name: Bağımlı DLL'i Projeye Tanıt (zkemkeeper)
         shell: powershell
         run: |
-          # Sunucuya indirilmiş olan klasörde .sln dosyasını arayıp buluyoruz
-          $sln = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
-          if ($null -eq $sln) {
-            Write-Error "Repo içinde hiçbir .sln dosyası bulunamadı!"
+          # MSBuild'in DLL'i bulabilmesi için referans klasörünü hazırlıyoruz
+          $libPath = "CeyPASSCihazPanel.UI\Libs"
+          if (-not (Test-Path $libPath)) { New-Item -ItemType Directory -Path $libPath -Force }
+          
+          # Sunucundaki DLL'in yolu (Eğer farklıysa burayı güncelle)
+          $sourceDll = "C:\Windows\SysWOW64\zkemkeeper.dll" 
+          
+          if (Test-Path $sourceDll) {
+            Copy-Item -Path $sourceDll -Destination $libPath -Force
+            Write-Host "zkemkeeper.dll başarıyla Libs klasörüne kopyalandı."
+          } else {
+            Write-Error "DLL sunucuda bulunamadı! Lütfen yolu kontrol et: $sourceDll"
             exit 1
           }
-          Write-Host "Bulunan Solution yolu: $($sln.FullName)"
-          # NuGet restore işlemini bulunan dosya üzerinden yapıyoruz
-          C:\nuget\nuget.exe restore "$($sln.FullName)"
+
+      - name: NuGet Restore
+        run: C:\nuget\nuget.exe restore CeyPASSCihazPanel.sln
 
       - name: AssemblyInfo'dan sürüm oku
         id: version
         shell: powershell
         run: |
-          # Dosyayı projenin içinde arayıp buluyoruz
-          $info = Get-ChildItem -Recurse -Filter "AssemblyInfo.cs" | Where-Object { $_.FullName -match "Properties" } | Select-Object -First 1
-          $content = Get-Content $info.FullName -Raw
+          $path = "CeyPASSCihazPanel.UI\Properties\AssemblyInfo.cs"
+          $content = Get-Content $path -Raw
           if ($content -match 'AssemblyVersion\("([^"]+)"\)') {
             $ver = $Matches[1]
+            Write-Host "Bulunan Versiyon: $ver"
             "VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
 
-      - name: Build Release
-        shell: powershell
-        run: |
-          $sln = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
-          msbuild "$($sln.FullName)" /p:Configuration=Release /p:Platform="Any CPU"
+      - name: Build Release (MSBuild)
+        run: msbuild CeyPASSCihazPanel.sln /p:Configuration=Release /p:Platform="Any CPU"
 
-      - name: Zip ve Kopyala
+      - name: Zip Paketini Hazırla
+        id: zip
         shell: powershell
         run: |
-          # Görseldeki bin\Release yolunu baz alıyoruz
-          $releasePath = Get-ChildItem -Recurse -Directory -Filter "Release" | Where-Object { $_.FullName -match "bin\\Release" } | Select-Object -First 1
+          $src = "CeyPASSCihazPanel.UI\bin\Release"
           $zipName = "CeyPASSCihazPanel.v$env:VERSION.zip"
-          Compress-Archive -Path "$($releasePath.FullName)\*" -DestinationPath $zipName -Force
+          if (-not (Test-Path $src)) { Write-Error "Build çıktısı yok!"; exit 1 }
           
-          # update.xml oluştur
+          Compress-Archive -Path "$src\*" -DestinationPath $zipName -Force
+          echo "zip_name=$zipName" >> $env:GITHUB_OUTPUT
+
+      - name: update.xml ve Dağıtım
+        shell: powershell
+        run: |
+          # update.xml içeriğini oluştur
+          $zipName = "${{ steps.zip.outputs.zip_name }}"
           $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$env:VERSION</version><url>${{ env.UPDATE_BASE_URL }}/$zipName</url><mandatory>false</mandatory></item>"
           Set-Content -Path "update.xml" -Value $xml -Encoding UTF8
           
-          # HFS klasörüne taşı
-          Copy-Item -Path $zipName -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
-          Copy-Item -Path "update.xml" -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
+          # HFS klasörüne kopyala
+          if (-not (Test-Path $env:DEPLOY_PATH)) { New-Item -ItemType Directory -Path $env:DEPLOY_PATH -Force }
+          Copy-Item -Path $zipName -Destination $env:DEPLOY_PATH -Force
+          Copy-Item -Path "update.xml" -Destination $env:DEPLOY_PATH -Force
+          Write-Host "Dosyalar $env:DEPLOY_PATH klasörüne başarıyla taşındı."
