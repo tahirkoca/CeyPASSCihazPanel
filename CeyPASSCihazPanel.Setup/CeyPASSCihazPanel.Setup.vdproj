@@ -15,254 +15,266 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_1E9DD912DF37AB763C7AD950BD5FB916"
-        "OwnerKey" = "8:_C6B36903DFC4EB15A877F0F95DFB6DFB"
+        "MsmKey" = "8:_0D5342A1A9449D369B41ACB0F52D7F5F"
+        "OwnerKey" = "8:_799C8E48489BE471ACC2B855CC9C356A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E9DD912DF37AB763C7AD950BD5FB916"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_0D5342A1A9449D369B41ACB0F52D7F5F"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2A541331B184881C1AE63B0A2BC97F34"
-        "OwnerKey" = "8:_1E9DD912DF37AB763C7AD950BD5FB916"
+        "MsmKey" = "8:_31356AB9676D474BFF08261EE213F997"
+        "OwnerKey" = "8:_E563A874AA87C431D18687E450FAC173"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2A541331B184881C1AE63B0A2BC97F34"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_31356AB9676D474BFF08261EE213F997"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2A541331B184881C1AE63B0A2BC97F34"
-        "OwnerKey" = "8:_C6B36903DFC4EB15A877F0F95DFB6DFB"
+        "MsmKey" = "8:_3702C5DF96C1CF1FE543A8E19081E5E3"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_38812AD2D0A4FD091CBFA034C99E23C3"
-        "OwnerKey" = "8:_A3D6C7E28C82393EC8839604452A72FA"
+        "MsmKey" = "8:_501BFA682BBD2FD293BB582338F821A5"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_38812AD2D0A4FD091CBFA034C99E23C3"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_550E3FAA0B5EB2DD5C4D733CA1D0F82B"
+        "OwnerKey" = "8:_0D5342A1A9449D369B41ACB0F52D7F5F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4B9CE93065F69C8C48E39936233FD25F"
-        "OwnerKey" = "8:_FEE240AA3225F287C3F3F34F3ABA3B1F"
+        "MsmKey" = "8:_550E3FAA0B5EB2DD5C4D733CA1D0F82B"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4B9CE93065F69C8C48E39936233FD25F"
-        "OwnerKey" = "8:_5EC549CAC189D9E7995737CC2E89221A"
+        "MsmKey" = "8:_550E3FAA0B5EB2DD5C4D733CA1D0F82B"
+        "OwnerKey" = "8:_799C8E48489BE471ACC2B855CC9C356A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4B9CE93065F69C8C48E39936233FD25F"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4B9CE93065F69C8C48E39936233FD25F"
-        "OwnerKey" = "8:_C6E57AA58872CA0752DA0FE4BEC4749A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53B3CB3C018145519D735FF9A4FFDA71"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5EC549CAC189D9E7995737CC2E89221A"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_5CF468C13DCF4CDDA892F60A2F8D4867"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_62B5D893744C58CCCD012EA61BF42B27"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6A3BC4E4450322A0BCA1A5FFA820345F"
-        "OwnerKey" = "8:_76EB0A2073D6627FBE4ACF528D7D22F1"
+        "MsmKey" = "8:_65414AA10D5A494C987C982C009C0078"
+        "OwnerKey" = "8:_5CF468C13DCF4CDDA892F60A2F8D4867"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6A3BC4E4450322A0BCA1A5FFA820345F"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_65414AA10D5A494C987C982C009C0078"
+        "OwnerKey" = "8:_9F185BE91ED6F1F56F4777DAB87B27AF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_76EB0A2073D6627FBE4ACF528D7D22F1"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_65414AA10D5A494C987C982C009C0078"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A3D6C7E28C82393EC8839604452A72FA"
-        "OwnerKey" = "8:_E994D9E2DFBB48C3E3792CC9FB91F647"
+        "MsmKey" = "8:_65414AA10D5A494C987C982C009C0078"
+        "OwnerKey" = "8:_B3A31C66CDE9A1F315F074D6866F7517"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A3D6C7E28C82393EC8839604452A72FA"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_799C8E48489BE471ACC2B855CC9C356A"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A3D6C7E28C82393EC8839604452A72FA"
-        "OwnerKey" = "8:_76EB0A2073D6627FBE4ACF528D7D22F1"
+        "MsmKey" = "8:_89978B5DE40C74C468DE53F615C3E499"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A3D6C7E28C82393EC8839604452A72FA"
-        "OwnerKey" = "8:_6A3BC4E4450322A0BCA1A5FFA820345F"
+        "MsmKey" = "8:_89978B5DE40C74C468DE53F615C3E499"
+        "OwnerKey" = "8:_AF1635BA29967B932F7E3CBE552BF62B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C6B36903DFC4EB15A877F0F95DFB6DFB"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_89978B5DE40C74C468DE53F615C3E499"
+        "OwnerKey" = "8:_3702C5DF96C1CF1FE543A8E19081E5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C6E57AA58872CA0752DA0FE4BEC4749A"
-        "OwnerKey" = "8:_FEE240AA3225F287C3F3F34F3ABA3B1F"
+        "MsmKey" = "8:_9F185BE91ED6F1F56F4777DAB87B27AF"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C6E57AA58872CA0752DA0FE4BEC4749A"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_A9E1F8F8B2744AC59139991E60288E0D"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E994D9E2DFBB48C3E3792CC9FB91F647"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_AF1635BA29967B932F7E3CBE552BF62B"
+        "OwnerKey" = "8:_3702C5DF96C1CF1FE543A8E19081E5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E994D9E2DFBB48C3E3792CC9FB91F647"
-        "OwnerKey" = "8:_6A3BC4E4450322A0BCA1A5FFA820345F"
+        "MsmKey" = "8:_AF1635BA29967B932F7E3CBE552BF62B"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E994D9E2DFBB48C3E3792CC9FB91F647"
-        "OwnerKey" = "8:_76EB0A2073D6627FBE4ACF528D7D22F1"
+        "MsmKey" = "8:_B3A31C66CDE9A1F315F074D6866F7517"
+        "OwnerKey" = "8:_5CF468C13DCF4CDDA892F60A2F8D4867"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_FEE240AA3225F287C3F3F34F3ABA3B1F"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_B3A31C66CDE9A1F315F074D6866F7517"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+        "MsmKey" = "8:_E563A874AA87C431D18687E450FAC173"
+        "OwnerKey" = "8:_89978B5DE40C74C468DE53F615C3E499"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5EC549CAC189D9E7995737CC2E89221A"
+        "MsmKey" = "8:_E563A874AA87C431D18687E450FAC173"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_76EB0A2073D6627FBE4ACF528D7D22F1"
+        "MsmKey" = "8:_E563A874AA87C431D18687E450FAC173"
+        "OwnerKey" = "8:_3702C5DF96C1CF1FE543A8E19081E5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6A3BC4E4450322A0BCA1A5FFA820345F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E994D9E2DFBB48C3E3792CC9FB91F647"
+        "MsmKey" = "8:_E563A874AA87C431D18687E450FAC173"
+        "OwnerKey" = "8:_AF1635BA29967B932F7E3CBE552BF62B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A3D6C7E28C82393EC8839604452A72FA"
+        "OwnerKey" = "8:_501BFA682BBD2FD293BB582338F821A5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_38812AD2D0A4FD091CBFA034C99E23C3"
+        "OwnerKey" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FEE240AA3225F287C3F3F34F3ABA3B1F"
+        "OwnerKey" = "8:_9F185BE91ED6F1F56F4777DAB87B27AF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C6E57AA58872CA0752DA0FE4BEC4749A"
+        "OwnerKey" = "8:_3702C5DF96C1CF1FE543A8E19081E5E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4B9CE93065F69C8C48E39936233FD25F"
+        "OwnerKey" = "8:_AF1635BA29967B932F7E3CBE552BF62B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C6B36903DFC4EB15A877F0F95DFB6DFB"
+        "OwnerKey" = "8:_89978B5DE40C74C468DE53F615C3E499"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E9DD912DF37AB763C7AD950BD5FB916"
+        "OwnerKey" = "8:_E563A874AA87C431D18687E450FAC173"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2A541331B184881C1AE63B0A2BC97F34"
+        "OwnerKey" = "8:_31356AB9676D474BFF08261EE213F997"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5CF468C13DCF4CDDA892F60A2F8D4867"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B3A31C66CDE9A1F315F074D6866F7517"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_65414AA10D5A494C987C982C009C0078"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_799C8E48489BE471ACC2B855CC9C356A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0D5342A1A9449D369B41ACB0F52D7F5F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_550E3FAA0B5EB2DD5C4D733CA1D0F82B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -296,6 +308,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -320,6 +340,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -350,14 +378,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1E9DD912DF37AB763C7AD950BD5FB916"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0D5342A1A9449D369B41ACB0F52D7F5F"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:CeyPASSCihazPanel.DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1E9DD912DF37AB763C7AD950BD5FB916"
+                    "_0D5342A1A9449D369B41ACB0F52D7F5F"
                     {
                     "Name" = "8:CeyPASSCihazPanel.DAL.dll"
                     "Attributes" = "3:512"
@@ -381,45 +409,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2A541331B184881C1AE63B0A2BC97F34"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CeyPASSCihazPanel.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_2A541331B184881C1AE63B0A2BC97F34"
-                    {
-                    "Name" = "8:CeyPASSCihazPanel.Entities.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CeyPASSCihazPanel.Entities.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_38812AD2D0A4FD091CBFA034C99E23C3"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_31356AB9676D474BFF08261EE213F997"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_38812AD2D0A4FD091CBFA034C99E23C3"
+                    "_31356AB9676D474BFF08261EE213F997"
                     {
                     "Name" = "8:System.Runtime.CompilerServices.Unsafe.dll"
                     "Attributes" = "3:512"
@@ -443,20 +440,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4B9CE93065F69C8C48E39936233FD25F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3702C5DF96C1CF1FE543A8E19081E5E3"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Core, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Extensions.DependencyInjection, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4B9CE93065F69C8C48E39936233FD25F"
+                    "_3702C5DF96C1CF1FE543A8E19081E5E3"
                     {
-                    "Name" = "8:Microsoft.Web.WebView2.Core.dll"
+                    "Name" = "8:Microsoft.Extensions.DependencyInjection.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Web.WebView2.Core.dll"
+            "SourcePath" = "8:Microsoft.Extensions.DependencyInjection.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
@@ -474,10 +471,21 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_53B3CB3C018145519D735FF9A4FFDA71"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_501BFA682BBD2FD293BB582338F821A5"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\Desktop\\Icons\\cihazPanelLogo.ico"
-            "TargetName" = "8:cihazPanelLogo.ico"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                "ScatterAssemblies"
+                {
+                    "_501BFA682BBD2FD293BB582338F821A5"
+                    {
+                    "Name" = "8:System.IO.Compression.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.IO.Compression.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
             "Condition" = "8:"
@@ -491,23 +499,54 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5EC549CAC189D9E7995737CC2E89221A"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_550E3FAA0B5EB2DD5C4D733CA1D0F82B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Wpf, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CeyPASSCihazPanel.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5EC549CAC189D9E7995737CC2E89221A"
+                    "_550E3FAA0B5EB2DD5C4D733CA1D0F82B"
                     {
-                    "Name" = "8:Microsoft.Web.WebView2.Wpf.dll"
+                    "Name" = "8:CeyPASSCihazPanel.Entities.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Web.WebView2.Wpf.dll"
+            "SourcePath" = "8:CeyPASSCihazPanel.Entities.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5CF468C13DCF4CDDA892F60A2F8D4867"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.9.2.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_5CF468C13DCF4CDDA892F60A2F8D4867"
+                    {
+                    "Name" = "8:AutoUpdater.NET.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AutoUpdater.NET.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
@@ -556,20 +595,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6A3BC4E4450322A0BCA1A5FFA820345F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_65414AA10D5A494C987C982C009C0078"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Extensions.DependencyInjection.Abstractions, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Core, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6A3BC4E4450322A0BCA1A5FFA820345F"
+                    "_65414AA10D5A494C987C982C009C0078"
                     {
-                    "Name" = "8:Microsoft.Extensions.DependencyInjection.Abstractions.dll"
+                    "Name" = "8:Microsoft.Web.WebView2.Core.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Extensions.DependencyInjection.Abstractions.dll"
+            "SourcePath" = "8:Microsoft.Web.WebView2.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
@@ -587,76 +626,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_76EB0A2073D6627FBE4ACF528D7D22F1"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Extensions.DependencyInjection, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_76EB0A2073D6627FBE4ACF528D7D22F1"
-                    {
-                    "Name" = "8:Microsoft.Extensions.DependencyInjection.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Extensions.DependencyInjection.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A3D6C7E28C82393EC8839604452A72FA"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A3D6C7E28C82393EC8839604452A72FA"
-                    {
-                    "Name" = "8:System.Threading.Tasks.Extensions.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Threading.Tasks.Extensions.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C6B36903DFC4EB15A877F0F95DFB6DFB"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_799C8E48489BE471ACC2B855CC9C356A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:CeyPASSCihazPanel.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C6B36903DFC4EB15A877F0F95DFB6DFB"
+                    "_799C8E48489BE471ACC2B855CC9C356A"
                     {
                     "Name" = "8:CeyPASSCihazPanel.Business.dll"
                     "Attributes" = "3:512"
@@ -680,45 +657,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C6E57AA58872CA0752DA0FE4BEC4749A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.WinForms, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_C6E57AA58872CA0752DA0FE4BEC4749A"
-                    {
-                    "Name" = "8:Microsoft.Web.WebView2.WinForms.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Web.WebView2.WinForms.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E994D9E2DFBB48C3E3792CC9FB91F647"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_89978B5DE40C74C468DE53F615C3E499"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E994D9E2DFBB48C3E3792CC9FB91F647"
+                    "_89978B5DE40C74C468DE53F615C3E499"
                     {
                     "Name" = "8:Microsoft.Bcl.AsyncInterfaces.dll"
                     "Attributes" = "3:512"
@@ -742,20 +688,133 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FEE240AA3225F287C3F3F34F3ABA3B1F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9F185BE91ED6F1F56F4777DAB87B27AF"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AutoUpdater.NET, Version=1.9.2.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.Wpf, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_FEE240AA3225F287C3F3F34F3ABA3B1F"
+                    "_9F185BE91ED6F1F56F4777DAB87B27AF"
                     {
-                    "Name" = "8:AutoUpdater.NET.dll"
+                    "Name" = "8:Microsoft.Web.WebView2.Wpf.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:AutoUpdater.NET.dll"
+            "SourcePath" = "8:Microsoft.Web.WebView2.Wpf.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9E1F8F8B2744AC59139991E60288E0D"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\Desktop\\Icons\\cihazPanelLogo.ico"
+            "TargetName" = "8:cihazPanelLogo.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AF1635BA29967B932F7E3CBE552BF62B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Extensions.DependencyInjection.Abstractions, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_AF1635BA29967B932F7E3CBE552BF62B"
+                    {
+                    "Name" = "8:Microsoft.Extensions.DependencyInjection.Abstractions.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.Extensions.DependencyInjection.Abstractions.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B3A31C66CDE9A1F315F074D6866F7517"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Web.WebView2.WinForms, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B3A31C66CDE9A1F315F074D6866F7517"
+                    {
+                    "Name" = "8:Microsoft.Web.WebView2.WinForms.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.Web.WebView2.WinForms.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E563A874AA87C431D18687E450FAC173"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E563A874AA87C431D18687E450FAC173"
+                    {
+                    "Name" = "8:System.Threading.Tasks.Extensions.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Threading.Tasks.Extensions.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
@@ -830,7 +889,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CeyPASSCihazPanel.Setup"
         "ProductCode" = "8:{28004DCD-CA70-4CC4-9B58-F3B6F44C17C1}"
-        "PackageCode" = "8:{385739CF-996F-4498-89F9-612D6F5A079B}"
+        "PackageCode" = "8:{5006E807-2D82-4E7B-90EA-9ED57F3D66AF}"
         "UpgradeCode" = "8:{9E51C5A5-6315-4AC3-B765-69AE2E182552}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -950,7 +1009,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_59E2EA18275F46FFAFE004F88C40E084"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_72C14DADE8EF429A9372D59CD6AB71FC"
             {
             "Name" = "8:CeyPASS Cihaz Paneli"
             "Arguments" = "8:"
@@ -958,38 +1017,38 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
-            "Folder" = "8:_8944C2D952A4403BA8B0787E9FFBA059"
-            "WorkingFolder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Icon" = "8:_53B3CB3C018145519D735FF9A4FFDA71"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_77F3BFF3E4B349DD8E2086CC2C74199C"
-            {
-            "Name" = "8:CeyPASS Cihaz Paneli"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
-            "Folder" = "8:_5C8D0485B0AF498B939D52A3CA138CBD"
-            "WorkingFolder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Icon" = "8:_53B3CB3C018145519D735FF9A4FFDA71"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8C22CCBCF298400DB060EEE2E07DE6DB"
-            {
-            "Name" = "8:CeyPASS Cihaz Paneli"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_350FF1AF71A44E71BB19FBD75BA3F107"
+            "Target" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
             "Folder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
             "WorkingFolder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
-            "Icon" = "8:_53B3CB3C018145519D735FF9A4FFDA71"
+            "Icon" = "8:_A9E1F8F8B2744AC59139991E60288E0D"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BDC9131C446D41C1AD89E2950E864F0E"
+            {
+            "Name" = "8:CeyPASS Cihaz Paneli"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
+            "Folder" = "8:_8944C2D952A4403BA8B0787E9FFBA059"
+            "WorkingFolder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Icon" = "8:_A9E1F8F8B2744AC59139991E60288E0D"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E8A16F82594941D1817637B7749FC15A"
+            {
+            "Name" = "8:CeyPASS Cihaz Paneli"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_3CA326D9DD354E67BA44BC27FB1B3A82"
+            "Folder" = "8:_5C8D0485B0AF498B939D52A3CA138CBD"
+            "WorkingFolder" = "8:_092EA6D016044688B0E1C6E7C07E3869"
+            "Icon" = "8:_A9E1F8F8B2744AC59139991E60288E0D"
             "Feature" = "8:"
             }
         }
@@ -1391,7 +1450,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_350FF1AF71A44E71BB19FBD75BA3F107"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3CA326D9DD354E67BA44BC27FB1B3A82"
             {
             "SourcePath" = "8:..\\CeyPASSCihazPanel.UI\\obj\\Debug\\CeyPASSCihazPanel.exe"
             "TargetName" = "8:"
