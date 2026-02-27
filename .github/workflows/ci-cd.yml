@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  UPDATE_BASE_URL: 'http://192.168.0.23/CeyPASS-CihazPanel-Updates'
+  UPDATE_BASE_URL: 'http://212.156.146.198/CeyPASS-CihazPanel-Updates'
 
 jobs:
   build-and-deploy:
@@ -19,35 +19,48 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: NuGet Restore
-        # NuGet'i indirdiğin tam yolu kullanıyoruz
-        run: C:\nuget\nuget.exe restore CeyPASSCihazPanel.sln
+        shell: powershell
+        run: |
+          # Sunucuya indirilmiş olan klasörde .sln dosyasını arayıp buluyoruz
+          $sln = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
+          if ($null -eq $sln) {
+            Write-Error "Repo içinde hiçbir .sln dosyası bulunamadı!"
+            exit 1
+          }
+          Write-Host "Bulunan Solution yolu: $($sln.FullName)"
+          # NuGet restore işlemini bulunan dosya üzerinden yapıyoruz
+          C:\nuget\nuget.exe restore "$($sln.FullName)"
 
       - name: AssemblyInfo'dan sürüm oku
         id: version
         shell: powershell
         run: |
-          $content = Get-Content 'CeyPASSCihazPanel.UI\Properties\AssemblyInfo.cs' -Raw
+          # Dosyayı projenin içinde arayıp buluyoruz
+          $info = Get-ChildItem -Recurse -Filter "AssemblyInfo.cs" | Where-Object { $_.FullName -match "Properties" } | Select-Object -First 1
+          $content = Get-Content $info.FullName -Raw
           if ($content -match 'AssemblyVersion\("([^"]+)"\)') {
             $ver = $Matches[1]
             "VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
 
       - name: Build Release
-        run: msbuild CeyPASSCihazPanel.sln /p:Configuration=Release /p:Platform="Any CPU"
-
-      - name: Zip (bin\Release içeriği)
-        id: zip
         shell: powershell
         run: |
-          $src = "CeyPASSCihazPanel.UI\bin\Release"
+          $sln = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
+          msbuild "$($sln.FullName)" /p:Configuration=Release /p:Platform="Any CPU"
+
+      - name: Zip ve Kopyala
+        shell: powershell
+        run: |
+          # Görseldeki bin\Release yolunu baz alıyoruz
+          $releasePath = Get-ChildItem -Recurse -Directory -Filter "Release" | Where-Object { $_.FullName -match "bin\\Release" } | Select-Object -First 1
           $zipName = "CeyPASSCihazPanel.v$env:VERSION.zip"
-          Compress-Archive -Path "$src\*" -DestinationPath $zipName -Force
-          echo "zip_name=$zipName" >> $env:GITHUB_OUTPUT
-
-      - name: update.xml ve Kopyala
-        shell: powershell
-        run: |
-          $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$env:VERSION</version><url>${{ env.UPDATE_BASE_URL }}/${{ steps.zip.outputs.zip_name }}</url><mandatory>false</mandatory></item>"
+          Compress-Archive -Path "$($releasePath.FullName)\*" -DestinationPath $zipName -Force
+          
+          # update.xml oluştur
+          $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$env:VERSION</version><url>${{ env.UPDATE_BASE_URL }}/$zipName</url><mandatory>false</mandatory></item>"
           Set-Content -Path "update.xml" -Value $xml -Encoding UTF8
-          Copy-Item -Path "${{ steps.zip.outputs.zip_name }}" -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
+          
+          # HFS klasörüne taşı
+          Copy-Item -Path $zipName -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
           Copy-Item -Path "update.xml" -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
