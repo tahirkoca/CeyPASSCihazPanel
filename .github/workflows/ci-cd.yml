@@ -14,56 +14,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: 'c' # Tüm kodları 'c' isimli kısa bir klasöre çeker
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
       - name: NuGet Restore
-        # Artık klasör 'c' içinde olduğu için başına 'c\' ekliyoruz
-        run: nuget restore c\CeyPASSCihazPanel.sln
+        run: nuget restore CeyPASSCihazPanel.sln
 
       - name: AssemblyInfo'dan sürüm oku
         id: version
         shell: powershell
         run: |
-          # Yolu 'c' ile güncelledik
-          $content = Get-Content 'c\CeyPASSCihazPanel.UI\Properties\AssemblyInfo.cs' -Raw
+          $content = Get-Content 'CeyPASSCihazPanel.UI\Properties\AssemblyInfo.cs' -Raw
           if ($content -match 'AssemblyVersion\("([^"]+)"\)') {
             $ver = $Matches[1]
             "VERSION=$ver" | Out-File -FilePath $env:GITHUB_ENV -Append
-            "version=$ver" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
           }
 
       - name: Build Release
-        run: msbuild c\CeyPASSCihazPanel.sln /p:Configuration=Release /p:Platform="Any CPU"
+        run: msbuild CeyPASSCihazPanel.sln /p:Configuration=Release /p:Platform="Any CPU"
 
-      - name: Zip (bin\Release içeriği)
+      - name: Zip
         id: zip
         shell: powershell
         run: |
-          $version = $env:VERSION
-          # Kaynak yolu 'c' altındaki bin\Release oldu
-          $src = "c\CeyPASSCihazPanel.UI\bin\Release"
-          $zipName = "CeyPASSCihazPanel.v$version.zip"
+          $src = "CeyPASSCihazPanel.UI\bin\Release"
+          $zipName = "CeyPASSCihazPanel.v$env:VERSION.zip"
           Compress-Archive -Path "$src\*" -DestinationPath $zipName -Force
           echo "zip_name=$zipName" >> $env:GITHUB_OUTPUT
 
-      - name: update.xml oluştur
+      - name: update.xml ve Kopyala
         shell: powershell
         run: |
-          $version = $env:VERSION
-          $zipName = "${{ steps.zip.outputs.zip_name }}"
-          $url = "${{ env.UPDATE_BASE_URL }}/$zipName"
-          $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$version</version><url>$url</url><mandatory>false</mandatory></item>"
+          $xml = "<?xml version=`"1.0`" encoding=`"UTF-8`"?><item><version>$env:VERSION</version><url>${{ env.UPDATE_BASE_URL }}/${{ steps.zip.outputs.zip_name }}</url><mandatory>false</mandatory></item>"
           Set-Content -Path "update.xml" -Value $xml -Encoding UTF8
-
-      - name: Sunucuya kopyala
-        shell: powershell
-        run: |
-          $dest = 'C:\CeyPASS-CihazPanel-Updates'
-          if (-not (Test-Path $dest)) { New-Item -ItemType Directory -Path $dest -Force }
-          $zipFile = "${{ steps.zip.outputs.zip_name }}"
-          Copy-Item -Path $zipFile -Destination $dest -Force
-          Copy-Item -Path "update.xml" -Destination $dest -Force
+          Copy-Item -Path "${{ steps.zip.outputs.zip_name }}" -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
+          Copy-Item -Path "update.xml" -Destination 'C:\CeyPASS-CihazPanel-Updates' -Force
