@@ -28,7 +28,7 @@ namespace CeyPASSCihazPanel.DAL.Repositories
                 ELSE
                 BEGIN
                     UPDATE PuantajsizKartlar SET
-                        KartNo=@KartNo, KartAdi=@KartAdi, AktifMi=@AktifMi, FirmaId=@FirmaId,
+                        KartNo=@KartNo, AktifMi=@AktifMi, FirmaId=@FirmaId,
                         CalismaSekli=@CalismaSekli, ZiyaretciMi=@ZiyaretciMi,
                         AracKartiMi=@AracKartiMi, TaseronCalisanMi=@TaseronCalisanMi
                     WHERE KartId=@KartId
