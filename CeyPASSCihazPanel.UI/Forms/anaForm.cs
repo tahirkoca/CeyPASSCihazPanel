@@ -1,4 +1,4 @@
-﻿using CeyPASSCihazPanel.Business.Abstractions;
+using CeyPASSCihazPanel.Business.Abstractions;
 using CeyPASSCihazPanel.Business.Services;
 using CeyPASSCihazPanel.DAL.Repositories;
 using CeyPASSCihazPanel.Entities.Models;
@@ -28,7 +28,7 @@ namespace CeyPASSCihazPanel.UI
         private string _kullaniciAdi;
         private int? _firmaId;
         private List<Personel> _tumPersoneller;
-        private List<PuantajsizKart> _tumKartlar;
+        private List<PuantajsizKisi> _tumPuantajsizKisiler;
         private List<Terminal> _tumCihazlar;
         private List<CihazLogItem> _tumLoglar = new List<CihazLogItem>();
 
@@ -38,7 +38,6 @@ namespace CeyPASSCihazPanel.UI
             _deviceService = deviceService;
             _bulkUploadService = new BulkUploadService(
                 new SqlKisilerBulkRepository(),
-                new SqlPuantajsizKartBulkRepository(),
                 new SqlYemekhaneGirisLimitRepository());
             _cihazGrupService = new CihazGrupService(new SqlCihazGrupRepository());
             
@@ -78,6 +77,8 @@ namespace CeyPASSCihazPanel.UI
                 CihazYonetimiTabBaslat();
                 InitializeLogDataGridView();
                 InitializeCihazGruplariTab();
+
+                RefreshSonPuantajsizKisiIdleriLabel();
             }
             catch (Exception ex)
             {
@@ -85,18 +86,60 @@ namespace CeyPASSCihazPanel.UI
                     "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void RefreshSonPuantajsizKisiIdleriLabel()
+        {
+            if (lblSonPuantajsizKisiIdleri == null) return;
+
+            try
+            {
+                var firmalar = _lookupService.GetSonPuantajsizKisiIdleri(_firmaId);
+                if (firmalar == null || firmalar.Count == 0)
+                {
+                    lblSonPuantajsizKisiIdleri.Text = "Puantajsız son ID bilgisi bulunamadı.";
+                    return;
+                }
+
+                // Admin (firmaId null) için sadece gerçekten puantajsız kaydı olan firmalar gösterilsin
+                var source = (_firmaId == null
+                    ? firmalar.Where(f => f.SonPersonelId.HasValue)
+                    : firmalar).ToList();
+
+                var lines = source
+                    .Where(f => !string.IsNullOrWhiteSpace(f.FirmaAdi))
+                    .Select(f => $"{f.FirmaAdi}: {(f.SonPersonelId?.ToString() ?? "-")}")
+                    .ToList();
+
+                if (lines.Count > 0)
+                {
+                    lblSonPuantajsizKisiIdleri.Text =
+                        "Misafir/Stajyer Kartlarında Veritabanındaki En Son Personel ID'si:" +
+                        Environment.NewLine +
+                        string.Join(Environment.NewLine, lines);
+                }
+                else
+                {
+                    lblSonPuantajsizKisiIdleri.Text =
+                        "Misafir/Stajyer Kartlarında Veritabanındaki En Son Personel ID'si:\nBilgi bulunamadı.";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblSonPuantajsizKisiIdleri.Text = $"Puantajsız son ID okunamadı: {ex.Message}";
+            }
+        }
         private void ComboListesiniModaGoreYukle()
         {
             if (chkKartModu.Checked)
-                PuantajsizKartlariComboyaYukle();
+                PuantajsizKisileriComboyaYukle();
             else
                 PersonelleriYukle();
         }
-        private void PuantajsizKartlariComboyaYukle()
+        private void PuantajsizKisileriComboyaYukle()
         {
             personelComboBox.Items.Clear();
 
-            var kartlar = _lookupService.GetAktifPuantajsizKartlar(_firmaId);
+            var kartlar = _lookupService.GetAktifPuantajsizKisiler(_firmaId);
 
             foreach (var k in kartlar)
             {
@@ -177,7 +220,7 @@ namespace CeyPASSCihazPanel.UI
                 string kartNo = string.IsNullOrWhiteSpace(kartBox.Text) ? (k.KartNo ?? "") : kartBox.Text.Trim();
 
                 // DB'den yetkili cihazları al
-                var yetkiliCihazIdListesi = _lookupService.GetKartYetkiliCihazlar(kartId);
+                var yetkiliCihazIdListesi = _lookupService.GetPersonelYetkiliCihazlar(kartId);
 
                 List<string> hedefIpListesi = new List<string>();
 
@@ -406,7 +449,7 @@ namespace CeyPASSCihazPanel.UI
                 string silKartAdi = k.KartAdi;
 
                 // DB'den yetkili cihazları al
-                var silYetkiliCihazIdler = _lookupService.GetKartYetkiliCihazlar(silKartId);
+                var silYetkiliCihazIdler = _lookupService.GetPersonelYetkiliCihazlar(silKartId);
 
                 List<string> silHedefIpList = new List<string>();
 
@@ -563,7 +606,7 @@ namespace CeyPASSCihazPanel.UI
             // KART MODU
             if (chkKartModu.Checked)
             {
-                var kartlar = _lookupService.GetAktifPuantajsizKartlar(_firmaId).ToList();
+                var kartlar = _lookupService.GetAktifPuantajsizKisiler(_firmaId).ToList();
 
                 if (kartlar.Count == 0)
                 {
@@ -586,7 +629,7 @@ namespace CeyPASSCihazPanel.UI
                 foreach (var kart in kartlar)
                 {
                     // Her kart için ayrı ayrı yetki kontrolü
-                    var yetkiliCihazIdler = _lookupService.GetKartYetkiliCihazlar(kart.KartId);
+                    var yetkiliCihazIdler = _lookupService.GetPersonelYetkiliCihazlar(kart.KartId);
 
                     List<string> hedefIpList = new List<string>();
 
@@ -777,7 +820,7 @@ namespace CeyPASSCihazPanel.UI
             // KART MODU
             if (chkKartModu.Checked)
             {
-                var kartlar = _lookupService.GetAktifPuantajsizKartlar(_firmaId).ToList();
+                var kartlar = _lookupService.GetAktifPuantajsizKisiler(_firmaId).ToList();
 
                 if (kartlar.Count == 0)
                 {
@@ -800,7 +843,7 @@ namespace CeyPASSCihazPanel.UI
                 foreach (var kart in kartlar)
                 {
                     // Her kart için ayrı ayrı yetki kontrolü
-                    var yetkiliCihazIdler = _lookupService.GetKartYetkiliCihazlar(kart.KartId);
+                    var yetkiliCihazIdler = _lookupService.GetPersonelYetkiliCihazlar(kart.KartId);
 
                     List<string> hedefIpList = new List<string>();
 
@@ -1256,9 +1299,9 @@ namespace CeyPASSCihazPanel.UI
             {
                 if (chkYetkiKartModu.Checked)
                 {
-                    _tumKartlar = _lookupService.GetAktifPuantajsizKartlar(_firmaId).ToList();
+                    _tumPuantajsizKisiler = _lookupService.GetAktifPuantajsizKisiler(_firmaId).ToList();
 
-                    foreach (var kart in _tumKartlar)
+                    foreach (var kart in _tumPuantajsizKisiler)
                     {
                         lstYetkiPersonelKart.Items.Add(new KartItem
                         {
@@ -1316,7 +1359,7 @@ namespace CeyPASSCihazPanel.UI
             {
                 if (chkYetkiKartModu.Checked)
                 {
-                    var filtreliKartlar = _tumKartlar
+                    var filtreliKartlar = _tumPuantajsizKisiler
                         .Where(k => (k.KartAdi ?? "").ToLower().Contains(aramaMetni) ||
                                     (k.KartNo ?? "").ToLower().Contains(aramaMetni))
                         .ToList();
@@ -1367,7 +1410,7 @@ namespace CeyPASSCihazPanel.UI
                 {
                     if (!(lstYetkiPersonelKart.SelectedItem is KartItem kart)) return;
 
-                    var yetkiliCihazIdler = _lookupService.GetKartYetkiliCihazlar(kart.KartId);
+                    var yetkiliCihazIdler = _lookupService.GetPersonelYetkiliCihazlar(kart.KartId);
 
                     foreach (var cihaz in _tumCihazlar)
                     {
@@ -1450,7 +1493,7 @@ namespace CeyPASSCihazPanel.UI
                 {
                     if (!(lstYetkiPersonelKart.SelectedItem is KartItem kart)) return;
 
-                    basarili = _lookupService.KartYetkiKaydet(kart.KartId, secilenCihazIdler, _firmaId);
+                    basarili = _lookupService.PersonelYetkiKaydet(kart.KartId, secilenCihazIdler, _firmaId);
                     mesaj = basarili
                         ? $"✅ {kart.KartAdi} için {secilenCihazIdler.Count} cihaz yetkisi kaydedildi."
                         : "❌ Yetki kaydedilemedi!";
@@ -2235,27 +2278,6 @@ namespace CeyPASSCihazPanel.UI
             }
         }
 
-        private void btnTopluKartYukle_Click(object sender, EventArgs e)
-        {
-            using (var ofd = new OpenFileDialog { Filter = "Excel Dosyaları|*.xlsx;*.xls", Title = "Toplu Kart Listesi Seç" })
-            {
-                if (ofd.ShowDialog() != DialogResult.OK) return;
-                try
-                {
-                    DataTable dt = ReadExcelFile(ofd.FileName);
-                    if (MessageBox.Show($"Lütfen bu işlemler öncesi sistem admini ile iletişimde olunuz, işlem geri alınamaz! {dt.Rows.Count} kart yüklenecek. Emin misiniz?",
-                        "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
-
-                    (int basarili, int hatali) = _bulkUploadService.BulkUpsertKartlar(dt);
-                    MessageBox.Show($"İşlem Tamamlandı.\nBaşarılı: {basarili}\nHatalı: {hatali}", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Dosya okuma hatası: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
         private void btnTemplateKisi_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
@@ -2267,26 +2289,6 @@ namespace CeyPASSCihazPanel.UI
                 try
                 {
                     MiniExcel.CreateXlsx(sfd.FileName, _bulkUploadService.GetKisiTemplate());
-                    MessageBox.Show("Şablon başarıyla oluşturuldu.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Şablon oluşturma hatası: {ex.Message}", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void btnTemplateKart_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-                "⚠️ Dikkat: İndirilen şablonda örnek veriler bulunmaktadır.\nYükleme yapmadan önce örnek satırı silip kendi verilerinizi giriniz.",
-                "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            using (var sfd = new SaveFileDialog { Filter = "Excel Dosyası|*.xlsx", Title = "Kart Yükleme Şablonu İndir", FileName = "KartSablon.xlsx" })
-            {
-                if (sfd.ShowDialog() != DialogResult.OK) return;
-                try
-                {
-                    MiniExcel.CreateXlsx(sfd.FileName, _bulkUploadService.GetKartTemplate());
                     MessageBox.Show("Şablon başarıyla oluşturuldu.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace CeyPASSCihazPanel.DAL.Abstractions
 {
-    public interface IPuantajsizKartBulkRepository
+    public interface IPuantajsizKisiRepository
     {
-        (int Basarili, int Hatali) BulkUpsert(IEnumerable<PuantajsizKartBulk> rows);
+        IList<PuantajsizKisi> GetAktifKartlar(int? firmaId);
     }
 }

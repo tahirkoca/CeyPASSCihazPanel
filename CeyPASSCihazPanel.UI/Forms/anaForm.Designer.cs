@@ -1,4 +1,4 @@
-﻿namespace CeyPASSCihazPanel.UI
+namespace CeyPASSCihazPanel.UI
 {
     partial class anaForm
     {
@@ -60,16 +60,9 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.btnTopluTanimla = new System.Windows.Forms.Button();
             this.btnTopluSilme = new System.Windows.Forms.Button();
-            // YENİ EKLENEN KONTROLLER
-            this.tlpBulkOperations = new System.Windows.Forms.TableLayoutPanel();
-            this.btnTopluKisiYukle = new System.Windows.Forms.Button();
-            this.btnTopluKartYukle = new System.Windows.Forms.Button();
-            this.btnLogExcelExport = new System.Windows.Forms.Button();
-            this.btnTemplateKisi = new System.Windows.Forms.Button();
-            this.btnTemplateKart = new System.Windows.Forms.Button();
-            this.btnTopluYemekhaneYukle = new System.Windows.Forms.Button();
-            this.btnTemplateYemekhane = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlSonPuantajsizKisiIdleri = new System.Windows.Forms.Panel();
+            this.lblSonPuantajsizKisiIdleri = new System.Windows.Forms.Label();
             this.btnTanimla = new System.Windows.Forms.Button();
             this.btnKisiSil = new System.Windows.Forms.Button();
             this.btnCihazKullanicilariGetir = new System.Windows.Forms.Button();
@@ -83,6 +76,12 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.personelComboBox = new System.Windows.Forms.ComboBox();
+            this.tlpBulkOperations = new System.Windows.Forms.TableLayoutPanel();
+            this.btnTopluKisiYukle = new System.Windows.Forms.Button();
+            this.btnTemplateKisi = new System.Windows.Forms.Button();
+            this.btnTopluYemekhaneYukle = new System.Windows.Forms.Button();
+            this.btnTemplateYemekhane = new System.Windows.Forms.Button();
+            this.btnLogExcelExport = new System.Windows.Forms.Button();
             this.tabYetkiYonetimi = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelYetki = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelYetkiSol = new System.Windows.Forms.TableLayoutPanel();
@@ -132,6 +131,7 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.pnlSonPuantajsizKisiIdleri.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -579,6 +579,7 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.chkKartModu, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tlpBulkOperations, 0, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -587,131 +588,25 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 103F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 190F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(597, 846);
             this.tableLayoutPanel2.TabIndex = 15;
-            this.tableLayoutPanel2.Controls.Add(this.tlpBulkOperations, 0, 6);
             // 
-            // tlpBulkOperations
-            // 
-            this.tlpBulkOperations.ColumnCount = 2;
-            this.tlpBulkOperations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tlpBulkOperations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tlpBulkOperations.Controls.Add(this.btnTopluKisiYukle, 0, 0);
-            this.tlpBulkOperations.Controls.Add(this.btnTemplateKisi, 1, 0);
-            this.tlpBulkOperations.Controls.Add(this.btnTopluKartYukle, 0, 1);
-            this.tlpBulkOperations.Controls.Add(this.btnTemplateKart, 1, 1);
-            this.tlpBulkOperations.Controls.Add(this.btnTopluYemekhaneYukle, 0, 2);
-            this.tlpBulkOperations.Controls.Add(this.btnTemplateYemekhane, 1, 2);
-            this.tlpBulkOperations.Controls.Add(this.btnLogExcelExport, 0, 3);
-            this.tlpBulkOperations.SetColumnSpan(this.btnLogExcelExport, 2);
-            // Uyarı mesajı kaldırıldı
-            this.tlpBulkOperations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpBulkOperations.Location = new System.Drawing.Point(3, 386);
-            this.tlpBulkOperations.Name = "tlpBulkOperations";
-            this.tlpBulkOperations.RowCount = 4;
-            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tlpBulkOperations.Size = new System.Drawing.Size(591, 457);
-            this.tlpBulkOperations.TabIndex = 40;
-            // 
-            // btnTopluKisiYukle
-            // 
-            this.btnTopluKisiYukle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113))))); // Yeşil
-            this.btnTopluKisiYukle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTopluKisiYukle.FlatAppearance.BorderSize = 0;
-            this.btnTopluKisiYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTopluKisiYukle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.btnTopluKisiYukle.ForeColor = System.Drawing.Color.White;
-            this.btnTopluKisiYukle.Location = new System.Drawing.Point(3, 3);
-            this.btnTopluKisiYukle.Name = "btnTopluKisiYukle";
-            this.btnTopluKisiYukle.Size = new System.Drawing.Size(585, 108);
-            this.btnTopluKisiYukle.TabIndex = 0;
-            this.btnTopluKisiYukle.Text = "📁 TOPLU KİŞİ LİSTESİ YÜKLE (Excel)";
-            this.btnTopluKisiYukle.UseVisualStyleBackColor = false;
-            // 
-            // btnTopluKartYukle
-            // 
-            this.btnTopluKartYukle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34))))); // Turuncu
-            this.btnTopluKartYukle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTopluKartYukle.FlatAppearance.BorderSize = 0;
-            this.btnTopluKartYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTopluKartYukle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.btnTopluKartYukle.ForeColor = System.Drawing.Color.White;
-            this.btnTopluKartYukle.Location = new System.Drawing.Point(3, 117);
-            this.btnTopluKartYukle.Name = "btnTopluKartYukle";
-            this.btnTopluKartYukle.Size = new System.Drawing.Size(585, 108);
-            this.btnTopluKartYukle.TabIndex = 1;
-            this.btnTopluKartYukle.Text = "💳 TOPLU KART YÜKLE (Excel)";
-            this.btnTopluKartYukle.UseVisualStyleBackColor = false;
-            // 
-            // btnLogExcelExport
-            // 
-            this.btnLogExcelExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96))))); // Koyu Yeşil
-            this.btnLogExcelExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLogExcelExport.FlatAppearance.BorderSize = 0;
-            this.btnLogExcelExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogExcelExport.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.btnLogExcelExport.ForeColor = System.Drawing.Color.White;
-            this.btnLogExcelExport.Location = new System.Drawing.Point(3, 231);
-            this.btnLogExcelExport.Name = "btnLogExcelExport";
-            this.btnLogExcelExport.Size = new System.Drawing.Size(585, 108);
-            this.btnLogExcelExport.TabIndex = 2;
-            this.btnLogExcelExport.Text = "📊 CİHAZ LOGLARINI EXCELE AKTAR";
-            this.btnLogExcelExport.UseVisualStyleBackColor = false;
-            // 
-            // lblUyariMesaji
-            // 
-            // Bu kontrol kaldırıldı
-            // 
-            // btnTopluYemekhaneYukle
-            // 
-            this.btnTopluYemekhaneYukle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185))))); // Mavi
-            this.btnTopluYemekhaneYukle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTopluYemekhaneYukle.FlatAppearance.BorderSize = 0;
-            this.btnTopluYemekhaneYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTopluYemekhaneYukle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.btnTopluYemekhaneYukle.ForeColor = System.Drawing.Color.White;
-            this.btnTopluYemekhaneYukle.Location = new System.Drawing.Point(3, 345);
-            this.btnTopluYemekhaneYukle.Name = "btnTopluYemekhaneYukle";
-            this.btnTopluYemekhaneYukle.Size = new System.Drawing.Size(409, 109);
-            this.btnTopluYemekhaneYukle.TabIndex = 3;
-            this.btnTopluYemekhaneYukle.Text = "🍽️ TOPLU YEMEKHANE LİMİT YÜKLE (Günlük Yemek Adedi)";
-            this.btnTopluYemekhaneYukle.UseVisualStyleBackColor = false;
-            this.btnTopluYemekhaneYukle.Click += new System.EventHandler(this.btnTopluYemekhaneYukle_Click);
-            // 
-            // btnTemplateYemekhane
-            // 
-            this.btnTemplateYemekhane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.btnTemplateYemekhane.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTemplateYemekhane.FlatAppearance.BorderSize = 0;
-            this.btnTemplateYemekhane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTemplateYemekhane.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.btnTemplateYemekhane.ForeColor = System.Drawing.Color.White;
-            this.btnTemplateYemekhane.Location = new System.Drawing.Point(418, 345);
-            this.btnTemplateYemekhane.Name = "btnTemplateYemekhane";
-            this.btnTemplateYemekhane.Size = new System.Drawing.Size(170, 109);
-            this.btnTemplateYemekhane.TabIndex = 4;
-            this.btnTemplateYemekhane.Text = "📥 Şablon İndir";
-            this.btnTemplateYemekhane.UseVisualStyleBackColor = false;
-            this.btnTemplateYemekhane.Click += new System.EventHandler(this.btnTemplateYemekhane_Click);
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.42301F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.57699F));
             this.tableLayoutPanel7.Controls.Add(this.btnTopluTanimla, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.btnTopluSilme, 1, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 319);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 406);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(591, 61);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(591, 126);
             this.tableLayoutPanel7.TabIndex = 34;
             // 
             // btnTopluTanimla
@@ -727,7 +622,7 @@
             this.btnTopluTanimla.Location = new System.Drawing.Point(3, 3);
             this.btnTopluTanimla.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.btnTopluTanimla.Name = "btnTopluTanimla";
-            this.btnTopluTanimla.Size = new System.Drawing.Size(284, 55);
+            this.btnTopluTanimla.Size = new System.Drawing.Size(287, 120);
             this.btnTopluTanimla.TabIndex = 27;
             this.btnTopluTanimla.Text = "Cihazlara Toplu Personel Tanımla";
             this.btnTopluTanimla.UseVisualStyleBackColor = false;
@@ -743,9 +638,9 @@
             this.btnTopluSilme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTopluSilme.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnTopluSilme.ForeColor = System.Drawing.Color.White;
-            this.btnTopluSilme.Location = new System.Drawing.Point(298, 3);
+            this.btnTopluSilme.Location = new System.Drawing.Point(301, 3);
             this.btnTopluSilme.Name = "btnTopluSilme";
-            this.btnTopluSilme.Size = new System.Drawing.Size(290, 55);
+            this.btnTopluSilme.Size = new System.Drawing.Size(287, 120);
             this.btnTopluSilme.TabIndex = 28;
             this.btnTopluSilme.Text = "Cihazlardan Toplu Personel Silme";
             this.btnTopluSilme.UseVisualStyleBackColor = false;
@@ -757,16 +652,47 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.Controls.Add(this.btnTanimla, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.btnKisiSil, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.btnCihazKullanicilariGetir, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.pnlSonPuantajsizKisiIdleri, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.btnTanimla, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.btnKisiSil, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.btnCihazKullanicilariGetir, 2, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 216);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 95F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(591, 97);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(591, 184);
             this.tableLayoutPanel6.TabIndex = 33;
+            // 
+            // pnlSonPuantajsizKisiIdleri
+            // 
+            this.pnlSonPuantajsizKisiIdleri.AutoScroll = true;
+            this.pnlSonPuantajsizKisiIdleri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.tableLayoutPanel6.SetColumnSpan(this.pnlSonPuantajsizKisiIdleri, 3);
+            this.pnlSonPuantajsizKisiIdleri.Controls.Add(this.lblSonPuantajsizKisiIdleri);
+            this.pnlSonPuantajsizKisiIdleri.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSonPuantajsizKisiIdleri.Location = new System.Drawing.Point(3, 3);
+            this.pnlSonPuantajsizKisiIdleri.Name = "pnlSonPuantajsizKisiIdleri";
+            this.pnlSonPuantajsizKisiIdleri.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
+            this.pnlSonPuantajsizKisiIdleri.Size = new System.Drawing.Size(585, 89);
+            this.pnlSonPuantajsizKisiIdleri.TabIndex = 51;
+            // 
+            // lblSonPuantajsizKisiIdleri
+            // 
+            this.lblSonPuantajsizKisiIdleri.AutoSize = true;
+            this.lblSonPuantajsizKisiIdleri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.lblSonPuantajsizKisiIdleri.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSonPuantajsizKisiIdleri.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblSonPuantajsizKisiIdleri.ForeColor = System.Drawing.Color.White;
+            this.lblSonPuantajsizKisiIdleri.Location = new System.Drawing.Point(13, 10);
+            this.lblSonPuantajsizKisiIdleri.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSonPuantajsizKisiIdleri.MaximumSize = new System.Drawing.Size(565, 0);
+            this.lblSonPuantajsizKisiIdleri.Name = "lblSonPuantajsizKisiIdleri";
+            this.lblSonPuantajsizKisiIdleri.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
+            this.lblSonPuantajsizKisiIdleri.Size = new System.Drawing.Size(686, 30);
+            this.lblSonPuantajsizKisiIdleri.TabIndex = 50;
+            this.lblSonPuantajsizKisiIdleri.Text = "Misafir/Stajyer Kartlarında Veritabanındaki En Son Personel ID\'si: Yükleniyor...";
             // 
             // btnTanimla
             // 
@@ -778,12 +704,12 @@
             this.btnTanimla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTanimla.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnTanimla.ForeColor = System.Drawing.Color.White;
-            this.btnTanimla.Location = new System.Drawing.Point(3, 3);
+            this.btnTanimla.Location = new System.Drawing.Point(3, 98);
             this.btnTanimla.Margin = new System.Windows.Forms.Padding(3, 3, 8, 3);
             this.btnTanimla.Name = "btnTanimla";
-            this.btnTanimla.Size = new System.Drawing.Size(185, 91);
+            this.btnTanimla.Size = new System.Drawing.Size(185, 83);
             this.btnTanimla.TabIndex = 9;
-            this.btnTanimla.Text = "Cihazlara Personel Tanımla";
+            this.btnTanimla.Text = "Cihazlara Personel\r\nTanımla";
             this.btnTanimla.UseVisualStyleBackColor = false;
             this.btnTanimla.Click += new System.EventHandler(this.btnTanimla_Click);
             // 
@@ -797,12 +723,12 @@
             this.btnKisiSil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKisiSil.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnKisiSil.ForeColor = System.Drawing.Color.White;
-            this.btnKisiSil.Location = new System.Drawing.Point(198, 3);
+            this.btnKisiSil.Location = new System.Drawing.Point(198, 98);
             this.btnKisiSil.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnKisiSil.Name = "btnKisiSil";
-            this.btnKisiSil.Size = new System.Drawing.Size(192, 91);
+            this.btnKisiSil.Size = new System.Drawing.Size(192, 83);
             this.btnKisiSil.TabIndex = 13;
-            this.btnKisiSil.Text = "Cihazlardan Personel Silme";
+            this.btnKisiSil.Text = "Cihazlardan Personel\r\nSilme";
             this.btnKisiSil.UseVisualStyleBackColor = false;
             this.btnKisiSil.Click += new System.EventHandler(this.btnKisiSil_Click);
             // 
@@ -816,12 +742,12 @@
             this.btnCihazKullanicilariGetir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCihazKullanicilariGetir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnCihazKullanicilariGetir.ForeColor = System.Drawing.Color.White;
-            this.btnCihazKullanicilariGetir.Location = new System.Drawing.Point(394, 3);
+            this.btnCihazKullanicilariGetir.Location = new System.Drawing.Point(394, 98);
             this.btnCihazKullanicilariGetir.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
             this.btnCihazKullanicilariGetir.Name = "btnCihazKullanicilariGetir";
-            this.btnCihazKullanicilariGetir.Size = new System.Drawing.Size(194, 91);
+            this.btnCihazKullanicilariGetir.Size = new System.Drawing.Size(194, 83);
             this.btnCihazKullanicilariGetir.TabIndex = 15;
-            this.btnCihazKullanicilariGetir.Text = "Cihazlardan Kullanıcıları Getir";
+            this.btnCihazKullanicilariGetir.Text = "Cihazlardan Kullanıcıları\r\nGetir";
             this.btnCihazKullanicilariGetir.UseVisualStyleBackColor = false;
             this.btnCihazKullanicilariGetir.Click += new System.EventHandler(this.btnCihazKullanicilariGetir_Click);
             // 
@@ -953,6 +879,107 @@
             this.personelComboBox.Size = new System.Drawing.Size(280, 31);
             this.personelComboBox.TabIndex = 8;
             this.personelComboBox.SelectedIndexChanged += new System.EventHandler(this.personelComboBox_SelectedIndexChanged);
+            // 
+            // tlpBulkOperations
+            // 
+            this.tlpBulkOperations.ColumnCount = 2;
+            this.tlpBulkOperations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tlpBulkOperations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tlpBulkOperations.Controls.Add(this.btnTopluKisiYukle, 0, 0);
+            this.tlpBulkOperations.Controls.Add(this.btnTemplateKisi, 1, 0);
+            this.tlpBulkOperations.Controls.Add(this.btnTopluYemekhaneYukle, 0, 1);
+            this.tlpBulkOperations.Controls.Add(this.btnTemplateYemekhane, 1, 1);
+            this.tlpBulkOperations.Controls.Add(this.btnLogExcelExport, 0, 2);
+            this.tlpBulkOperations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpBulkOperations.Location = new System.Drawing.Point(3, 538);
+            this.tlpBulkOperations.Name = "tlpBulkOperations";
+            this.tlpBulkOperations.RowCount = 3;
+            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.31147F));
+            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.85246F));
+            this.tlpBulkOperations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.83607F));
+            this.tlpBulkOperations.Size = new System.Drawing.Size(591, 305);
+            this.tlpBulkOperations.TabIndex = 40;
+            // 
+            // btnTopluKisiYukle
+            // 
+            this.btnTopluKisiYukle.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnTopluKisiYukle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTopluKisiYukle.FlatAppearance.BorderSize = 0;
+            this.btnTopluKisiYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTopluKisiYukle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnTopluKisiYukle.ForeColor = System.Drawing.Color.White;
+            this.btnTopluKisiYukle.Location = new System.Drawing.Point(3, 3);
+            this.btnTopluKisiYukle.Name = "btnTopluKisiYukle";
+            this.btnTopluKisiYukle.Size = new System.Drawing.Size(407, 119);
+            this.btnTopluKisiYukle.TabIndex = 22;
+            this.btnTopluKisiYukle.Text = "📁 TOPLU KİŞİ YÜKLE";
+            this.btnTopluKisiYukle.UseVisualStyleBackColor = false;
+            this.btnTopluKisiYukle.Click += new System.EventHandler(this.btnTopluKisiYukle_Click);
+            // 
+            // btnTemplateKisi
+            // 
+            this.btnTemplateKisi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.btnTemplateKisi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTemplateKisi.FlatAppearance.BorderSize = 0;
+            this.btnTemplateKisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTemplateKisi.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.btnTemplateKisi.ForeColor = System.Drawing.Color.White;
+            this.btnTemplateKisi.Location = new System.Drawing.Point(416, 3);
+            this.btnTemplateKisi.Name = "btnTemplateKisi";
+            this.btnTemplateKisi.Size = new System.Drawing.Size(172, 119);
+            this.btnTemplateKisi.TabIndex = 25;
+            this.btnTemplateKisi.Text = "📥 Şablon İndir";
+            this.btnTemplateKisi.UseVisualStyleBackColor = false;
+            this.btnTemplateKisi.Click += new System.EventHandler(this.btnTemplateKisi_Click);
+            // 
+            // btnTopluYemekhaneYukle
+            // 
+            this.btnTopluYemekhaneYukle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnTopluYemekhaneYukle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTopluYemekhaneYukle.FlatAppearance.BorderSize = 0;
+            this.btnTopluYemekhaneYukle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTopluYemekhaneYukle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnTopluYemekhaneYukle.ForeColor = System.Drawing.Color.White;
+            this.btnTopluYemekhaneYukle.Location = new System.Drawing.Point(3, 128);
+            this.btnTopluYemekhaneYukle.Name = "btnTopluYemekhaneYukle";
+            this.btnTopluYemekhaneYukle.Size = new System.Drawing.Size(407, 82);
+            this.btnTopluYemekhaneYukle.TabIndex = 3;
+            this.btnTopluYemekhaneYukle.Text = "🍽️ TOPLU YEMEKHANE LİMİTİ YÜKLE";
+            this.btnTopluYemekhaneYukle.UseVisualStyleBackColor = false;
+            this.btnTopluYemekhaneYukle.Click += new System.EventHandler(this.btnTopluYemekhaneYukle_Click);
+            // 
+            // btnTemplateYemekhane
+            // 
+            this.btnTemplateYemekhane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.btnTemplateYemekhane.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTemplateYemekhane.FlatAppearance.BorderSize = 0;
+            this.btnTemplateYemekhane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTemplateYemekhane.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.btnTemplateYemekhane.ForeColor = System.Drawing.Color.White;
+            this.btnTemplateYemekhane.Location = new System.Drawing.Point(416, 128);
+            this.btnTemplateYemekhane.Name = "btnTemplateYemekhane";
+            this.btnTemplateYemekhane.Size = new System.Drawing.Size(172, 82);
+            this.btnTemplateYemekhane.TabIndex = 4;
+            this.btnTemplateYemekhane.Text = "📥 Şablon İndir";
+            this.btnTemplateYemekhane.UseVisualStyleBackColor = false;
+            this.btnTemplateYemekhane.Click += new System.EventHandler(this.btnTemplateYemekhane_Click);
+            // 
+            // btnLogExcelExport
+            // 
+            this.btnLogExcelExport.BackColor = System.Drawing.Color.ForestGreen;
+            this.tlpBulkOperations.SetColumnSpan(this.btnLogExcelExport, 2);
+            this.btnLogExcelExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLogExcelExport.FlatAppearance.BorderSize = 0;
+            this.btnLogExcelExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogExcelExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnLogExcelExport.ForeColor = System.Drawing.Color.White;
+            this.btnLogExcelExport.Location = new System.Drawing.Point(3, 216);
+            this.btnLogExcelExport.Name = "btnLogExcelExport";
+            this.btnLogExcelExport.Size = new System.Drawing.Size(585, 86);
+            this.btnLogExcelExport.TabIndex = 24;
+            this.btnLogExcelExport.Text = "📊 CİHAZ LOGLARINI EXCELE AKTAR";
+            this.btnLogExcelExport.UseVisualStyleBackColor = false;
+            this.btnLogExcelExport.Click += new System.EventHandler(this.btnLogExcelExport_Click);
             // 
             // tabYetkiYonetimi
             // 
@@ -1463,88 +1490,16 @@
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tlpBulkOperations.ResumeLayout(false);
-            // 
-            // btnTopluKisiYukle
-            // 
-            this.btnTopluKisiYukle.BackColor = System.Drawing.Color.SeaGreen;
-            this.btnTopluKisiYukle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTopluKisiYukle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnTopluKisiYukle.ForeColor = System.Drawing.Color.White;
-            this.btnTopluKisiYukle.Location = new System.Drawing.Point(3, 3);
-            this.btnTopluKisiYukle.Name = "btnTopluKisiYukle";
-            this.btnTopluKisiYukle.Size = new System.Drawing.Size(400, 34);
-            this.btnTopluKisiYukle.TabIndex = 22;
-            this.btnTopluKisiYukle.Text = "📁 TOPLU KİŞİ YÜKLE (Puantajı Yapılan Kişiler)";
-            this.btnTopluKisiYukle.UseVisualStyleBackColor = false;
-            this.btnTopluKisiYukle.Click += new System.EventHandler(this.btnTopluKisiYukle_Click);
-            // 
-            // btnTemplateKisi
-            // 
-            this.btnTemplateKisi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.btnTemplateKisi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTemplateKisi.FlatAppearance.BorderSize = 0;
-            this.btnTemplateKisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTemplateKisi.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.btnTemplateKisi.ForeColor = System.Drawing.Color.White;
-            this.btnTemplateKisi.Location = new System.Drawing.Point(409, 3);
-            this.btnTemplateKisi.Name = "btnTemplateKisi";
-            this.btnTemplateKisi.Size = new System.Drawing.Size(167, 34);
-            this.btnTemplateKisi.TabIndex = 25;
-            this.btnTemplateKisi.Text = "📥 Şablon İndir";
-            this.btnTemplateKisi.UseVisualStyleBackColor = false;
-            this.btnTemplateKisi.Click += new System.EventHandler(this.btnTemplateKisi_Click);
-            // 
-            // btnTopluKartYukle
-            // 
-            this.btnTopluKartYukle.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnTopluKartYukle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTopluKartYukle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnTopluKartYukle.ForeColor = System.Drawing.Color.White;
-            this.btnTopluKartYukle.Location = new System.Drawing.Point(3, 43);
-            this.btnTopluKartYukle.Name = "btnTopluKartYukle";
-            this.btnTopluKartYukle.Size = new System.Drawing.Size(400, 34);
-            this.btnTopluKartYukle.TabIndex = 23;
-            this.btnTopluKartYukle.Text = "💳 TOPLU KART YÜKLE (Puantajsız Kartlar)";
-            this.btnTopluKartYukle.UseVisualStyleBackColor = false;
-            this.btnTopluKartYukle.Click += new System.EventHandler(this.btnTopluKartYukle_Click);
-            // 
-            // btnTemplateKart
-            // 
-            this.btnTemplateKart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.btnTemplateKart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTemplateKart.FlatAppearance.BorderSize = 0;
-            this.btnTemplateKart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTemplateKart.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
-            this.btnTemplateKart.ForeColor = System.Drawing.Color.White;
-            this.btnTemplateKart.Location = new System.Drawing.Point(409, 43);
-            this.btnTemplateKart.Name = "btnTemplateKart";
-            this.btnTemplateKart.Size = new System.Drawing.Size(167, 34);
-            this.btnTemplateKart.TabIndex = 26;
-            this.btnTemplateKart.Text = "📥 Şablon İndir";
-            this.btnTemplateKart.UseVisualStyleBackColor = false;
-            this.btnTemplateKart.Click += new System.EventHandler(this.btnTemplateKart_Click);
-            // 
-            // btnLogExcelExport
-            // 
-            this.btnLogExcelExport.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnLogExcelExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLogExcelExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnLogExcelExport.ForeColor = System.Drawing.Color.White;
-            this.btnLogExcelExport.Location = new System.Drawing.Point(3, 83);
-            this.btnLogExcelExport.Name = "btnLogExcelExport";
-            this.btnLogExcelExport.Size = new System.Drawing.Size(573, 34);
-            this.btnLogExcelExport.TabIndex = 24;
-            this.btnLogExcelExport.Text = "📊 CİHAZ LOGLARINI EXCELE AKTAR";
-            this.btnLogExcelExport.UseVisualStyleBackColor = false;
-            this.btnLogExcelExport.Click += new System.EventHandler(this.btnLogExcelExport_Click);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
+            this.pnlSonPuantajsizKisiIdleri.ResumeLayout(false);
+            this.pnlSonPuantajsizKisiIdleri.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tlpBulkOperations.ResumeLayout(false);
             this.tabYetkiYonetimi.ResumeLayout(false);
             this.tableLayoutPanelYetki.ResumeLayout(false);
             this.tableLayoutPanelYetkiSol.ResumeLayout(false);
@@ -1652,10 +1607,10 @@
         private System.Windows.Forms.Button btnCihazBilgileriYenile;
         private System.Windows.Forms.TableLayoutPanel tlpBulkOperations;
         private System.Windows.Forms.Button btnTopluKisiYukle;
-        private System.Windows.Forms.Button btnTopluKartYukle;
         private System.Windows.Forms.Button btnLogExcelExport;
         private System.Windows.Forms.Button btnTemplateKisi;
-        private System.Windows.Forms.Button btnTemplateKart;
+        private System.Windows.Forms.Panel pnlSonPuantajsizKisiIdleri;
+        private System.Windows.Forms.Label lblSonPuantajsizKisiIdleri;
         private System.Windows.Forms.Button btnTopluYemekhaneYukle;
         private System.Windows.Forms.Button btnTemplateYemekhane;
     }

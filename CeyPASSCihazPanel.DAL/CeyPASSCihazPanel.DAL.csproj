@@ -44,23 +44,21 @@
   <ItemGroup>
     <Compile Include="Abstractions\ICihazGrupRepository.cs" />
     <Compile Include="Abstractions\ICihazRepository.cs" />
+    <Compile Include="Abstractions\IFirmaRepository.cs" />
     <Compile Include="Abstractions\IKisiCihazYetkiRepository.cs" />
     <Compile Include="Abstractions\IKisilerBulkRepository.cs" />
     <Compile Include="Abstractions\IPersonelRepository.cs" />
-    <Compile Include="Abstractions\IPuantajsizKartBulkRepository.cs" />
-    <Compile Include="Abstractions\IPuantajsizKartCihazYetkiRepository.cs" />
-    <Compile Include="Abstractions\IPuantajsizKartRepository.cs" />
+    <Compile Include="Abstractions\IPuantajsizKisiRepository.cs" />
     <Compile Include="Abstractions\IUserRepository.cs" />
     <Compile Include="Abstractions\IYemekhaneGirisLimitRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SqlCihazGrupRepository.cs" />
     <Compile Include="Repositories\SqlCihazRepository.cs" />
+    <Compile Include="Repositories\SqlFirmaRepository.cs" />
     <Compile Include="Repositories\SqlKisiCihazYetkiRepository.cs" />
     <Compile Include="Repositories\SqlKisilerBulkRepository.cs" />
     <Compile Include="Repositories\SqlPersonelRepository.cs" />
-    <Compile Include="Repositories\SqlPuantajsizKartBulkRepository.cs" />
-    <Compile Include="Repositories\SqlPuantajsizKartCihazYetkiRepository.cs" />
-    <Compile Include="Repositories\SqlPuantajsizKartRepository.cs" />
+    <Compile Include="Repositories\SqlPuantajsizKisiRepository.cs" />
     <Compile Include="Repositories\SqlUserRepository.cs" />
     <Compile Include="Repositories\SqlYemekhaneGirisLimitRepository.cs" />
   </ItemGroup>

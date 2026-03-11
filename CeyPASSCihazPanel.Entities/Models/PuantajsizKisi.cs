@@ -1,6 +1,6 @@
-﻿namespace CeyPASSCihazPanel.Entities.Models
+namespace CeyPASSCihazPanel.Entities.Models
 {
-    public class PuantajsizKart
+    public class PuantajsizKisi
     {
         public int KartId { get; set; }
         public string KartNo { get; set; }

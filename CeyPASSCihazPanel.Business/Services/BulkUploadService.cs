@@ -10,16 +10,13 @@ namespace CeyPASSCihazPanel.Business.Services
     public class BulkUploadService : IBulkUploadService
     {
         private readonly IKisilerBulkRepository _kisiRepo;
-        private readonly IPuantajsizKartBulkRepository _kartRepo;
         private readonly IYemekhaneGirisLimitRepository _yemekhaneRepo;
 
         public BulkUploadService(
             IKisilerBulkRepository kisiRepo,
-            IPuantajsizKartBulkRepository kartRepo,
             IYemekhaneGirisLimitRepository yemekhaneRepo)
         {
             _kisiRepo = kisiRepo;
-            _kartRepo = kartRepo;
             _yemekhaneRepo = yemekhaneRepo;
         }
 
@@ -37,26 +34,40 @@ namespace CeyPASSCihazPanel.Business.Services
             return _kisiRepo.BulkUpsert(rows);
         }
 
-        // ── PuantajsizKartlar ────────────────────────────────────────────────────
+        // ── Kartlar (Kisiler: PuantajYapilirMi=0) ───────────────────────────────
         public (int Basarili, int Hatali) BulkUpsertKartlar(DataTable dt)
         {
-            var list = new List<PuantajsizKartBulk>();
+            var rows = new List<IDictionary<string, object>>();
             foreach (DataRow dr in dt.Rows)
             {
-                list.Add(new PuantajsizKartBulk
+                var personelId = GetStr(dr, "KartId");
+                if (string.IsNullOrWhiteSpace(personelId)) continue;
+
+                var dict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                 {
-                    KartId          = GetStr(dr, "KartId"),
-                    KartNo          = GetStr(dr, "KartNo"),
-                    KartAdi         = GetStr(dr, "KartAdi"),
-                    FirmaId         = GetInt(dr, "FirmaId", 1),
-                    AktifMi         = GetBool(dr, "AktifMi", true),
-                    CalismaSekli    = GetStr(dr, "CalismaSekli"),
-                    ZiyaretciMi     = GetBool(dr, "ZiyaretciMi", false),
-                    AracKartiMi     = GetBool(dr, "AracKartiMi", false),
-                    TaseronCalisanMi= GetBool(dr, "TaseronCalisanMi", false),
-                });
+                    // KartId artık Kisiler.PersonelId
+                    ["PersonelId"] = personelId,
+                    ["KartNo"] = GetStr(dr, "KartNo"),
+                    // KartAdi -> Ad (Soyad boş bırakılır; mevcut bulk repo INSERT'te Ad/Soyad kullanıyor)
+                    ["Ad"] = GetStr(dr, "KartAdi"),
+                    ["Soyad"] = "",
+                    ["FirmaId"] = GetInt(dr, "FirmaId", 1),
+                    ["CalismaSekli"] = GetStr(dr, "CalismaSekli"),
+                    // Kart listesi filtresi için kritik
+                    ["PuantajYapilirMi"] = 0,
+                    // Yeni kart flag kolonları (opsiyonel)
+                    ["ZiyaretciMi"] = GetBool(dr, "ZiyaretciMi", false) ? 1 : 0,
+                    ["AracKartiMi"] = GetBool(dr, "AracKartiMi", false) ? 1 : 0,
+                    ["TaseronCalisanMi"] = GetBool(dr, "TaseronCalisanMi", false) ? 1 : 0,
+                };
+
+                // Eski şablondaki AktifMi=0 -> Kisiler.IstenCikisTarihi set et (aktiflik semantiğini korumak için)
+                if (dt.Columns.Contains("AktifMi") && !GetBool(dr, "AktifMi", true))
+                    dict["IstenCikisTarihi"] = DateTime.Now.Date;
+
+                rows.Add(dict);
             }
-            return _kartRepo.BulkUpsert(list);
+            return _kisiRepo.BulkUpsert(rows);
         }
 
         // ── YemekhaneGirisLimitler ───────────────────────────────────────────────

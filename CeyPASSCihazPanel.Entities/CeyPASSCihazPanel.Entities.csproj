@@ -59,14 +59,14 @@
     <Compile Include="Models\KartItem.cs" />
     <Compile Include="Models\Kullanici.cs" />
     <Compile Include="Models\LoginResult.cs" />
+    <Compile Include="Models\FirmaSonPuantajsizKisi.cs" />
     <Compile Include="Models\OfflineLog.cs" />
     <Compile Include="Models\Personel.cs" />
     <Compile Include="Models\PersonelCihazDurum.cs" />
     <Compile Include="Models\PersonelItem.cs" />
-    <Compile Include="Models\PuantajsizKart.cs" />
+    <Compile Include="Models\PuantajsizKisi.cs" />
     <Compile Include="Models\CihazGrubu.cs" />
     <Compile Include="Models\CihazGrupDetay.cs" />
-    <Compile Include="Models\PuantajsizKartBulk.cs" />
     <Compile Include="Models\Terminal.cs" />
     <Compile Include="Models\YemekhaneGirisLimiti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

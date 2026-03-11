@@ -1,4 +1,4 @@
-﻿using AutoUpdaterDotNET;
+using AutoUpdaterDotNET;
 using CeyPASSCihazPanel.Business.Abstractions;
 using CeyPASSCihazPanel.Business.Services;
 using CeyPASSCihazPanel.DAL.Abstractions;
@@ -58,10 +58,10 @@ namespace CeyPASSCihazPanel
             // DataAccess
             services.AddScoped<IUserRepository, SqlUserRepository>();
             services.AddScoped<ICihazRepository, SqlCihazRepository>();
+            services.AddScoped<IFirmaRepository, SqlFirmaRepository>();
             services.AddScoped<IPersonelRepository, SqlPersonelRepository>();
-            services.AddScoped<IPuantajsizKartRepository, SqlPuantajsizKartRepository>();
+            services.AddScoped<IPuantajsizKisiRepository, SqlPuantajsizKisiRepository>();
             services.AddScoped<IKisiCihazYetkiRepository, SqlKisiCihazYetkiRepository>();
-            services.AddScoped<IPuantajsizKartCihazYetkiRepository, SqlPuantajsizKartCihazYetkiRepository>();
 
             // Business
             services.AddScoped<IAuthService, AuthService>();

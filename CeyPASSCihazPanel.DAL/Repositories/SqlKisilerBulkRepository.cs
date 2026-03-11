@@ -41,17 +41,20 @@ namespace CeyPASSCihazPanel.DAL.Repositories
                     KayitTarihi  = COALESCE(@KayitTarihi, KayitTarihi),
                     Email        = COALESCE(@Email, Email),
                     PuantajYapilirMi = COALESCE(@PuantajYapilirMi, PuantajYapilirMi),
-                    BolumId      = COALESCE(@BolumId, BolumId)
+                    BolumId      = COALESCE(@BolumId, BolumId),
+                    ZiyaretciMi  = COALESCE(@ZiyaretciMi, ZiyaretciMi),
+                    AracKartiMi  = COALESCE(@AracKartiMi, AracKartiMi),
+                    TaseronCalisanMi = COALESCE(@TaseronCalisanMi, TaseronCalisanMi)
                 WHERE PersonelId = @PersonelId;
 
                 IF @@ROWCOUNT = 0
                 BEGIN
                     INSERT INTO Kisiler (PersonelId, Ad, Soyad, KartNo, TcKimlikNo, PozisyonId, DogumTarihi,
                         DepartmanId, IseGirisTarihi, IstenCikisTarihi, CalismaStatusu, FirmaId, IsyeriId,
-                        CalismaSekli, CepTel, KayitTarihi, Email, PuantajYapilirMi, BolumId)
+                        CalismaSekli, CepTel, KayitTarihi, Email, PuantajYapilirMi, BolumId, ZiyaretciMi, AracKartiMi, TaseronCalisanMi)
                     VALUES (@PersonelId, @Ad, @Soyad, @KartNo, @TcKimlikNo, @PozisyonId, @DogumTarihi,
                         @DepartmanId, @IseGirisTarihi, @IstenCikisTarihi, @CalismaStatusu, @FirmaId, @IsyeriId,
-                        @CalismaSekli, @CepTel, @KayitTarihi, @Email, @PuantajYapilirMi, @BolumId);
+                        @CalismaSekli, @CepTel, @KayitTarihi, @Email, @PuantajYapilirMi, @BolumId, @ZiyaretciMi, @AracKartiMi, @TaseronCalisanMi);
                 END";
 
             using (var conn = new SqlConnection(_connStr))
@@ -123,6 +126,11 @@ namespace CeyPASSCihazPanel.DAL.Repositories
 
                             // BolumId: int
                             cmd.Parameters.Add("@BolumId", SqlDbType.Int).Value = GetNullableInt(row, "BolumId");
+
+                            // ZiyaretciMi / AracKartiMi / TaseronCalisanMi: bit
+                            cmd.Parameters.Add("@ZiyaretciMi", SqlDbType.Bit).Value = GetNullableBit(row, "ZiyaretciMi");
+                            cmd.Parameters.Add("@AracKartiMi", SqlDbType.Bit).Value = GetNullableBit(row, "AracKartiMi");
+                            cmd.Parameters.Add("@TaseronCalisanMi", SqlDbType.Bit).Value = GetNullableBit(row, "TaseronCalisanMi");
 
                             cmd.ExecuteNonQuery();
                             basarili++;
