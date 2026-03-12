@@ -52,7 +52,7 @@ CeyPASS Cihaz Paneli, ZKTeco marka biyometrik cihazların (parmak izi okuyucu, y
 ### Teknoloji Stack
 
 #### Framework ve Dil
-- **.NET 8 (Windows)** veya .NET Framework 4.7.2
+- **.NET 8 (Windows)**
 - **C# (Windows Forms)**
 
 #### Mimari Katmanlar
