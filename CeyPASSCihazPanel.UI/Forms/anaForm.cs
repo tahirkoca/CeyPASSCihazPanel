@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.IO;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Configuration;
 using CeyPASSCihazPanel.UI.Helpers;
 

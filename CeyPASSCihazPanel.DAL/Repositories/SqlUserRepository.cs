@@ -1,8 +1,8 @@
-﻿using CeyPASSCihazPanel.DAL.Abstractions;
+using CeyPASSCihazPanel.DAL.Abstractions;
 using CeyPASSCihazPanel.Entities.Models;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace CeyPASSCihazPanel.DAL.Repositories
 {

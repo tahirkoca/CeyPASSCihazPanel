@@ -1,9 +1,9 @@
-﻿using CeyPASSCihazPanel.DAL.Abstractions;
+using CeyPASSCihazPanel.DAL.Abstractions;
 using CeyPASSCihazPanel.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

@@ -52,7 +52,7 @@ CeyPASS Cihaz Paneli, ZKTeco marka biyometrik cihazların (parmak izi okuyucu, y
 ### Teknoloji Stack
 
 #### Framework ve Dil
-- **.NET Framework 4.7.2**
+- **.NET 8 (Windows)** veya .NET Framework 4.7.2
 - **C# (Windows Forms)**
 
 #### Mimari Katmanlar
@@ -85,10 +85,15 @@ Proje, katmanlı mimari (Layered Architecture) prensiplerine göre tasarlanmış
     </connectionStrings>
     ```
 
-3.  **Visual Studio Kurulumu**:
+3.  **ZKTeco COM bileşeni (zkemkeeper)** – cihazlara bağlanmak için zorunludur:
+    - ZKTeco SDK veya cihaz CD'sinden **zkemkeeper.dll** dosyasını alıp `CeyPASSCihazPanel.UI\Libs` klasörüne kopyalayın.
+    - Proje **registration-free COM** kullanır: derleme sonrası DLL otomatik olarak uygulama çıktı klasörüne kopyalanır; **regsvr32 ile kayıt gerekmez**.
+    - **"Modül yüklenemedi" / "Belirtilen yordam bulunamadı"** hatası alırsanız, DLL genelde eski Visual C++ çalışma zamanına bağımlıdır. **Microsoft Visual C++ Redistributable (x86)** yükleyin: [VC++ 2015-2022 x86](https://aka.ms/vs/17/release/vc_redist.x86.exe) ve gerekirse [VC++ 2010 x86](https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-6A6860F8D4F6/vcredist_x86.exe). Yükleme sonrası uygulamayı yeniden başlatın.
+    - İsterseniz **RegisterZkemkeeper.bat** ile de COM kaydı yapabilirsiniz (yönetici gerekir); registration-free ile kayıt şart değildir.
+
+4.  **Visual Studio / Derleme**:
     - `CeyPASSCihazPanel.sln` dosyasını açın.
     - NuGet paketlerini geri yükleyin.
-    - `zkemkeeper` COM bileşenini kaydedin (gerekirse).
     - Projeyi derleyin ve çalıştırın (F5).
 
 ### Lisans
@@ -147,7 +152,7 @@ CeyPASS Device Panel is a Windows Forms application designed for the centralized
 ### Technology Stack
 
 #### Framework and Language
-- **.NET Framework 4.7.2**
+- **.NET 8 (Windows)** or .NET Framework 4.7.2
 - **C# (Windows Forms)**
 
 #### Architectural Layers

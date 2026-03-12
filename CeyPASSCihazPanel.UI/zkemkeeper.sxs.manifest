@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity type="win32" name="zkemkeeper.sxs" version="1.0.0.0" />
+  <file name="zkemkeeper.dll">
+    <comClass description="CZKEM" clsid="{FE9DED34-E159-408E-8490-B720A5E632C7}" threadingModel="Both" />
+  </file>
+</assembly>
