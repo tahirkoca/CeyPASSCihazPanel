@@ -28,6 +28,7 @@ SELECT PersonelId, Ad, Soyad,KartNo
 FROM Kisiler K
 WHERE K.IstenCikisTarihi IS NULL
   AND ( @FirmaId IS NULL OR K.FirmaId = @FirmaId )
+  AND ISNULL(K.PuantajYapilirMi, 1) = 1
 ORDER BY Ad, Soyad";
 
                 using (var cmd = new SqlCommand(sql, conn))

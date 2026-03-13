@@ -33,7 +33,7 @@ WHERE K.IstenCikisTarihi IS NULL
   AND ISNULL(K.PuantajYapilirMi, 1) = 0
   AND ( @FirmaId IS NULL OR K.FirmaId = @FirmaId )
   AND TRY_CONVERT(int, K.PersonelId) IS NOT NULL
-ORDER BY KartAdi";
+ORDER BY KartId";
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
