@@ -14,5 +14,4 @@ packages/
 *.nupkg
 
 # Sensitive Configuration Files
-CeyPASSCihazPanel.UI/App.config
 *.log

@@ -63,6 +63,14 @@ Proje, katmanlı mimari (Layered Architecture) prensiplerine göre tasarlanmış
 3. **CeyPASSCihazPanel.DAL** - Veri Erişim Katmanı
 4. **CeyPASSCihazPanel.Entities** - Varlık Katmanı
 
+### CI/CD (Sürekli Entegrasyon ve Dağıtım)
+
+Bu depo, GitHub Actions tabanlı bir CI/CD hattına sahiptir:
+
+- Ana dala (`main`) yapılan push veya manuel tetikleme sonrasında Windows Forms uygulaması için otomatik build çalıştırılır.
+- Derleme çıktısı güncelleme paketi (zip + update.xml) olarak üretilir ve dağıtım klasörüne kopyalanır.
+- Uygulama içi otomatik güncelleme (AutoUpdater.NET) bu paketler üzerinden kullanıcılara yeni sürümleri sunar.
+
 ### Kurulum ve Çalıştırma
 
 > [!ÖNEMLİ]
@@ -173,6 +181,14 @@ The project is designed according to Layered Architecture principles:
 2. **CeyPASSCihazPanel.Business** - Business Logic Layer
 3. **CeyPASSCihazPanel.DAL** - Data Access Layer
 4. **CeyPASSCihazPanel.Entities** - Entity Layer
+
+### CI/CD (Continuous Integration and Deployment)
+
+This repository has a CI/CD pipeline based on GitHub Actions:
+
+- After each push to `main` or manual trigger, an automatic build runs for the Windows Forms application.
+- The build output is produced as an update package (zip + update.xml) and copied to the deploy folder.
+- The in-app auto-updater (AutoUpdater.NET) delivers new versions to users from these packages.
 
 ### Installation and Setup
 

@@ -34,42 +34,6 @@ namespace CeyPASSCihazPanel.Business.Services
             return _kisiRepo.BulkUpsert(rows);
         }
 
-        // ── Kartlar (Kisiler: PuantajYapilirMi=0) ───────────────────────────────
-        public (int Basarili, int Hatali) BulkUpsertKartlar(DataTable dt)
-        {
-            var rows = new List<IDictionary<string, object>>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                var personelId = GetStr(dr, "KartId");
-                if (string.IsNullOrWhiteSpace(personelId)) continue;
-
-                var dict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-                {
-                    // KartId artık Kisiler.PersonelId
-                    ["PersonelId"] = personelId,
-                    ["KartNo"] = GetStr(dr, "KartNo"),
-                    // KartAdi -> Ad (Soyad boş bırakılır; mevcut bulk repo INSERT'te Ad/Soyad kullanıyor)
-                    ["Ad"] = GetStr(dr, "KartAdi"),
-                    ["Soyad"] = "",
-                    ["FirmaId"] = GetInt(dr, "FirmaId", 1),
-                    ["CalismaSekli"] = GetStr(dr, "CalismaSekli"),
-                    // Kart listesi filtresi için kritik
-                    ["PuantajYapilirMi"] = 0,
-                    // Yeni kart flag kolonları (opsiyonel)
-                    ["ZiyaretciMi"] = GetBool(dr, "ZiyaretciMi", false) ? 1 : 0,
-                    ["AracKartiMi"] = GetBool(dr, "AracKartiMi", false) ? 1 : 0,
-                    ["TaseronCalisanMi"] = GetBool(dr, "TaseronCalisanMi", false) ? 1 : 0,
-                };
-
-                // Eski şablondaki AktifMi=0 -> Kisiler.IstenCikisTarihi set et (aktiflik semantiğini korumak için)
-                if (dt.Columns.Contains("AktifMi") && !GetBool(dr, "AktifMi", true))
-                    dict["IstenCikisTarihi"] = DateTime.Now.Date;
-
-                rows.Add(dict);
-            }
-            return _kisiRepo.BulkUpsert(rows);
-        }
-
         // ── YemekhaneGirisLimitler ───────────────────────────────────────────────
         public (int Basarili, int Hatali) BulkUpsertYemekhane(DataTable dt)
         {
@@ -113,6 +77,9 @@ namespace CeyPASSCihazPanel.Business.Services
             dt.Columns.Add("Email", typeof(string));
             dt.Columns.Add("PuantajYapilirMi", typeof(int));
             dt.Columns.Add("BolumId", typeof(int));
+            dt.Columns.Add("ZiyaretciMi", typeof(int));
+            dt.Columns.Add("AracKartiMi", typeof(int));
+            dt.Columns.Add("TaseronCalisanMi", typeof(int));
 
             var row = dt.NewRow();
             row["PersonelId"]     = "10001";
@@ -132,33 +99,9 @@ namespace CeyPASSCihazPanel.Business.Services
             row["Email"]          = "ornek@firma.com";
             row["PuantajYapilirMi"] = 1;
             row["BolumId"]        = 1;
-            dt.Rows.Add(row);
-            return dt;
-        }
-
-        public DataTable GetKartTemplate()
-        {
-            var dt = new DataTable();
-            dt.Columns.Add("KartId", typeof(string));
-            dt.Columns.Add("KartNo", typeof(string));
-            dt.Columns.Add("KartAdi", typeof(string));
-            dt.Columns.Add("FirmaId", typeof(int));
-            dt.Columns.Add("AktifMi", typeof(int));
-            dt.Columns.Add("CalismaSekli", typeof(string));
-            dt.Columns.Add("ZiyaretciMi", typeof(int));
-            dt.Columns.Add("AracKartiMi", typeof(int));
-            dt.Columns.Add("TaseronCalisanMi", typeof(int));
-
-            var row = dt.NewRow();
-            row["KartId"]          = "40000";
-            row["KartNo"]          = "13244272";
-            row["KartAdi"]         = "GUVENLİK KARTI";
-            row["FirmaId"]         = 101;
-            row["AktifMi"]         = 1;
-            row["CalismaSekli"]    = "9";
-            row["ZiyaretciMi"]     = 0;
-            row["AracKartiMi"]     = 0;
-            row["TaseronCalisanMi"]= 1;
+            row["ZiyaretciMi"]    = 0;
+            row["AracKartiMi"]    = 0;
+            row["TaseronCalisanMi"]= 0;
             dt.Rows.Add(row);
             return dt;
         }

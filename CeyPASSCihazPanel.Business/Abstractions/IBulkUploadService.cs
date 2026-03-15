@@ -6,12 +6,10 @@ namespace CeyPASSCihazPanel.Business.Abstractions
     {
         // Toplu yükleme
         (int Basarili, int Hatali) BulkUpsertKisiler(DataTable dt);
-        (int Basarili, int Hatali) BulkUpsertKartlar(DataTable dt);
         (int Basarili, int Hatali) BulkUpsertYemekhane(DataTable dt);
 
         // Şablon DataTable'ları
         DataTable GetKisiTemplate();
-        DataTable GetKartTemplate();
         DataTable GetYemekhaneTemplate();
     }
 }
