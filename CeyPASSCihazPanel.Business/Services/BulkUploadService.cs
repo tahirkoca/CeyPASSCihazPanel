@@ -21,7 +21,7 @@ namespace CeyPASSCihazPanel.Business.Services
         }
 
         // ── Kisiler ─────────────────────────────────────────────────────────────
-        public (int Basarili, int Hatali) BulkUpsertKisiler(DataTable dt)
+        public BulkUpsertResult BulkUpsertKisiler(DataTable dt)
         {
             var rows = new List<IDictionary<string, object>>();
             foreach (DataRow dr in dt.Rows)
@@ -35,7 +35,7 @@ namespace CeyPASSCihazPanel.Business.Services
         }
 
         // ── YemekhaneGirisLimitler ───────────────────────────────────────────────
-        public (int Basarili, int Hatali) BulkUpsertYemekhane(DataTable dt)
+        public BulkUpsertResult BulkUpsertYemekhane(DataTable dt)
         {
             var list = new List<YemekhaneGirisLimiti>();
             foreach (DataRow dr in dt.Rows)
@@ -47,7 +47,7 @@ namespace CeyPASSCihazPanel.Business.Services
                     PersonelId  = pid,
                     GunlukLimit = GetNullableInt(dr, "GunlukLimit"),
                     KayitTarihi = GetNullableDate(dr, "KayitTarihi"),
-                    AktifMi     = GetBool(dr, "AktifMi", true),
+                    AktifMi     = GetNullableBool(dr, "AktifMi"),
                 });
             }
             return _yemekhaneRepo.BulkUpsert(list);
@@ -144,6 +144,14 @@ namespace CeyPASSCihazPanel.Business.Services
             if (!dr.Table.Columns.Contains(col)) return def;
             var val = dr[col]?.ToString();
             if (string.IsNullOrWhiteSpace(val)) return def;
+            return val == "1" || val.ToLower() == "true";
+        }
+
+        private static bool? GetNullableBool(DataRow dr, string col)
+        {
+            if (!dr.Table.Columns.Contains(col)) return null;
+            var val = dr[col]?.ToString();
+            if (string.IsNullOrWhiteSpace(val)) return null;
             return val == "1" || val.ToLower() == "true";
         }
 

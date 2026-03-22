@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyPASSCihazPanel.Business", "..\CeyPASSCihazPanel.Business\CeyPASSCihazPanel.Business.csproj", "{61632915-7845-43A5-8C37-207963725276}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CeyPASSCihazPanel.Setup", "..\CeyPASSCihazPanel.Setup\CeyPASSCihazPanel.Setup.vdproj", "{09B0274D-D851-1D3A-92FF-BD549973A808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyPASSCihazPanel.Tests", "..\CeyPASSCihazPanel.Tests\CeyPASSCihazPanel.Tests.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{61632915-7845-43A5-8C37-207963725276}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09B0274D-D851-1D3A-92FF-BD549973A808}.Debug|Any CPU.ActiveCfg = Debug
 		{09B0274D-D851-1D3A-92FF-BD549973A808}.Release|Any CPU.ActiveCfg = Release
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

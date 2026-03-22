@@ -71,6 +71,41 @@ Bu depo, GitHub Actions tabanlı bir CI/CD hattına sahiptir:
 - Derleme çıktısı güncelleme paketi (zip + update.xml) olarak üretilir ve dağıtım klasörüne kopyalanır.
 - Uygulama içi otomatik güncelleme (AutoUpdater.NET) bu paketler üzerinden kullanıcılara yeni sürümleri sunar.
 
+### Testler
+
+Proje, **xUnit** tabanlı bir birim test paketi içermektedir. Testler `CeyPASSCihazPanel.Tests` projesinde yer alır.
+
+#### Test Bağımlılıkları
+
+| Paket | Sürüm |
+|---|---|
+| xunit | 2.9.2 |
+| Moq | 4.20.72 |
+| FluentAssertions | 6.12.2 |
+
+#### Test Kapsamı
+
+| Test Dosyası | Kapsadığı Alan |
+|---|---|
+| `AuthServiceTests.cs` | Kullanıcı girişi doğrulama, boş/hatalı kimlik bilgileri, büyük/küçük harf duyarlılığı |
+| `AdminLookUpServiceTests.cs` | Personel, cihaz ve yetki CRUD işlemlerinin delegasyonu |
+| `BulkUploadServiceTests.cs` | Toplu kişi/yemekhane yükleme, şablon kolon yapısı kontrolü |
+| `CihazGrupServiceTests.cs` | Cihaz grubu CRUD, null guard ve cihaz-grup ilişkilendirme |
+| `MiniExcelTests.cs` | XLSX dosyası üretimi, ZIP yapısı, XML kaçış karakterleri, üzerine yazma davranışı |
+
+#### Testleri Çalıştırma
+
+**Komut satırından (dotnet CLI):**
+```bash
+dotnet test CeyPASSCihazPanel.Tests/CeyPASSCihazPanel.Tests.csproj
+```
+
+**Visual Studio'da:**
+- Çözüm (`CeyPASSCihazPanel.sln`) açıldığında `CeyPASSCihazPanel.Tests` projesi otomatik olarak Test Explorer'a yüklenir.
+- **Test** → **Tüm Testleri Çalıştır** seçeneği ile tüm testler çalıştırılabilir.
+
+> **Not:** Mevcut CI/CD pipeline yalnızca derleme ve dağıtım işlemlerini kapsamaktadır; `dotnet test` adımı henüz eklenmemiştir.
+
 ### Kurulum ve Çalıştırma
 
 > [!ÖNEMLİ]
@@ -189,6 +224,41 @@ This repository has a CI/CD pipeline based on GitHub Actions:
 - After each push to `main` or manual trigger, an automatic build runs for the Windows Forms application.
 - The build output is produced as an update package (zip + update.xml) and copied to the deploy folder.
 - The in-app auto-updater (AutoUpdater.NET) delivers new versions to users from these packages.
+
+### Tests
+
+The project includes a unit test suite based on **xUnit**, located in the `CeyPASSCihazPanel.Tests` project.
+
+#### Test Dependencies
+
+| Package | Version |
+|---|---|
+| xunit | 2.9.2 |
+| Moq | 4.20.72 |
+| FluentAssertions | 6.12.2 |
+
+#### Test Coverage
+
+| Test File | Area Covered |
+|---|---|
+| `AuthServiceTests.cs` | User login validation, empty/invalid credentials, case-sensitive password checks |
+| `AdminLookUpServiceTests.cs` | Personnel, device, and authorization CRUD delegation |
+| `BulkUploadServiceTests.cs` | Bulk personnel/cafeteria upload, template column structure validation |
+| `CihazGrupServiceTests.cs` | Device group CRUD, null guard, and device-group association |
+| `MiniExcelTests.cs` | XLSX file generation, ZIP structure, XML escaping, overwrite behavior |
+
+#### Running the Tests
+
+**Via command line (dotnet CLI):**
+```bash
+dotnet test CeyPASSCihazPanel.Tests/CeyPASSCihazPanel.Tests.csproj
+```
+
+**In Visual Studio:**
+- When the solution (`CeyPASSCihazPanel.sln`) is opened, the `CeyPASSCihazPanel.Tests` project is automatically loaded into Test Explorer.
+- Use **Test** → **Run All Tests** to execute the full test suite.
+
+> **Note:** The current CI/CD pipeline only covers build and deployment steps; a `dotnet test` step has not been added yet.
 
 ### Installation and Setup
 

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using CeyPASSCihazPanel.Entities.Models;
 
 namespace CeyPASSCihazPanel.DAL.Abstractions
 {
     public interface IKisilerBulkRepository
     {
         /// <summary>
-        /// PersonelId üzerinden UPSERT yapar. (int basarili, int hatali) döner.
+        /// PersonelId üzerinden UPSERT yapar ve detaylı sonuç döner.
         /// </summary>
-        (int Basarili, int Hatali) BulkUpsert(IEnumerable<System.Collections.Generic.IDictionary<string, object>> rows);
+        BulkUpsertResult BulkUpsert(IEnumerable<System.Collections.Generic.IDictionary<string, object>> rows);
     }
 }

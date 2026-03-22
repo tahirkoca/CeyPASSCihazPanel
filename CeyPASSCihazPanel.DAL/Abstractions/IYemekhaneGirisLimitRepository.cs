@@ -5,6 +5,6 @@ namespace CeyPASSCihazPanel.DAL.Abstractions
 {
     public interface IYemekhaneGirisLimitRepository
     {
-        (int Basarili, int Hatali) BulkUpsert(IEnumerable<YemekhaneGirisLimiti> rows);
+        BulkUpsertResult BulkUpsert(IEnumerable<YemekhaneGirisLimiti> rows);
     }
 }

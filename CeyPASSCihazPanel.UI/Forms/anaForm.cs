@@ -11,11 +11,11 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.OleDb;
 using System.IO;
+using NPOI.SS.UserModel;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
-using CeyPASSCihazPanel.UI.Helpers;
+using CeyPASSCihazPanel.Business.Helpers;
 
 namespace CeyPASSCihazPanel.UI
 {
@@ -2239,19 +2239,35 @@ namespace CeyPASSCihazPanel.UI
         }
         private DataTable ReadExcelFile(string path)
         {
-            DataTable dt = new DataTable();
-            string connStr = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={path};Extended Properties='Excel 12.0 Xml;HDR=YES;'";
-            
-            using (OleDbConnection conn = new OleDbConnection(connStr))
+            var dt = new DataTable();
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                conn.Open();
-                DataTable schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                string sheetName = schemaTable.Rows[0]["TABLE_NAME"].ToString();
-                
-                string query = $"SELECT * FROM [{sheetName}]";
-                using (OleDbDataAdapter da = new OleDbDataAdapter(query, conn))
+                var workbook = WorkbookFactory.Create(stream);
+                var sheet = workbook.GetSheetAt(0);
+                if (sheet == null) return dt;
+
+                var formatter = new DataFormatter();
+                var headerRow = sheet.GetRow(0);
+                if (headerRow == null) return dt;
+
+                int colCount = headerRow.LastCellNum;
+                if (colCount <= 0) return dt;
+
+                for (int c = 0; c < colCount; c++)
                 {
-                    da.Fill(dt);
+                    string header = formatter.FormatCellValue(headerRow.GetCell(c));
+                    if (string.IsNullOrEmpty(header)) header = $"Col{c}";
+                    dt.Columns.Add(header);
+                }
+
+                for (int r = 1; r <= sheet.LastRowNum; r++)
+                {
+                    var row = sheet.GetRow(r);
+                    if (row == null) continue;
+                    var dr = dt.NewRow();
+                    for (int c = 0; c < colCount; c++)
+                        dr[c] = formatter.FormatCellValue(row.GetCell(c)) ?? "";
+                    dt.Rows.Add(dr);
                 }
             }
             return dt;
@@ -2268,8 +2284,22 @@ namespace CeyPASSCihazPanel.UI
                     if (MessageBox.Show($"Lütfen bu işlemler öncesi sistem admini ile iletişimde olunuz, işlem geri alınamaz! {dt.Rows.Count} kişi yüklenecek. Emin misiniz?",
                         "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
 
-                    (int basarili, int hatali) = _bulkUploadService.BulkUpsertKisiler(dt);
-                    MessageBox.Show($"İşlem Tamamlandı.\nBaşarılı: {basarili}\nHatalı: {hatali}", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var res = _bulkUploadService.BulkUpsertKisiler(dt);
+                    var details =
+                        $"İşlem Tamamlandı.\n\n" +
+                        $"Toplam satır: {res.Total}\n" +
+                        $"Yeni kayıt: {res.Inserted}\n" +
+                        $"Güncelleme: {res.Updated}\n" +
+                        $"Aynı Veri: {res.SameData}\n" +
+                        $"Boş Bırakılan (İşlem Yapılmadı): {res.BlankNoOp}\n" +
+                        $"Atlanan: {res.Skipped}\n" +
+                        $"Hatalı: {res.Failed}\n\n" +
+                        "Not: Boş Bırakılan (İşlem Yapılmadı) satırlar, Excel'de en az bir güncellenebilir alan boş/null geldiği için güncelleme uygulanmayan satırlardır.";
+
+                    if (res.ErrorSamples != null && res.ErrorSamples.Count > 0)
+                        details += "\n\nHata örnekleri:\n- " + string.Join("\n- ", res.ErrorSamples);
+
+                    MessageBox.Show(details, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -2378,9 +2408,23 @@ namespace CeyPASSCihazPanel.UI
                     var onayla = MessageBox.Show($"{dt.Rows.Count} yemekhane limiti bulundu. Veritabanına aktarmak istediğinize emin misiniz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (onayla != DialogResult.Yes) return;
 
-                    (int basarili, int hatali) = _bulkUploadService.BulkUpsertYemekhane(dt);
+                    var res = _bulkUploadService.BulkUpsertYemekhane(dt);
 
-                    MessageBox.Show($"İşlem Tamamlandı!\n\nBaşarılı: {basarili}\nHatalı: {hatali}", "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var details =
+                        $"İşlem Tamamlandı!\n\n" +
+                        $"Toplam satır: {res.Total}\n" +
+                        $"Yeni kayıt: {res.Inserted}\n" +
+                        $"Güncelleme: {res.Updated}\n" +
+                        $"Aynı Veri: {res.SameData}\n" +
+                        $"Boş Bırakılan (İşlem Yapılmadı): {res.BlankNoOp}\n" +
+                        $"Atlanan: {res.Skipped}\n" +
+                        $"Hatalı: {res.Failed}\n\n" +
+                        "Not: Boş Bırakılan (İşlem Yapılmadı) satırlar, Excel'de en az bir güncellenebilir alan boş/null geldiği için güncelleme uygulanmayan satırlardır.";
+
+                    if (res.ErrorSamples != null && res.ErrorSamples.Count > 0)
+                        details += "\n\nHata örnekleri:\n- " + string.Join("\n- ", res.ErrorSamples);
+
+                    MessageBox.Show(details, "Sonuç", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
